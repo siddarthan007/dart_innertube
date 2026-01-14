@@ -17,10 +17,14 @@ _$ToggleButtonRendererImpl _$$ToggleButtonRendererImplFromJson(
       toggledText: json['toggledText'] == null
           ? null
           : Runs.fromJson(json['toggledText'] as Map<String, dynamic>),
-      defaultNavigationEndpoint: NavigationEndpoint.fromJson(
-          json['defaultNavigationEndpoint'] as Map<String, dynamic>),
-      toggledNavigationEndpoint: NavigationEndpoint.fromJson(
-          json['toggledNavigationEndpoint'] as Map<String, dynamic>),
+      defaultNavigationEndpoint: json['defaultNavigationEndpoint'] == null
+          ? null
+          : NavigationEndpoint.fromJson(
+              json['defaultNavigationEndpoint'] as Map<String, dynamic>),
+      toggledNavigationEndpoint: json['toggledNavigationEndpoint'] == null
+          ? null
+          : NavigationEndpoint.fromJson(
+              json['toggledNavigationEndpoint'] as Map<String, dynamic>),
       trackingParams: json['trackingParams'] as String,
     );
 

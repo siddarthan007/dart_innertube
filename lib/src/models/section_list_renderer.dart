@@ -75,7 +75,6 @@ class ChipCloudChipRenderer with _$ChipCloudChipRenderer {
 class SectionListContent with _$SectionListContent {
   const SectionListContent._();
 
-  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory SectionListContent({
     MusicCarouselShelfRenderer? musicCarouselShelfRenderer,
     @JsonKey(name: 'musicImmersiveCarouselShelfRenderer')

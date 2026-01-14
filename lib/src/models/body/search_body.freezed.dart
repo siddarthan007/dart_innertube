@@ -153,7 +153,8 @@ class __$$SearchBodyImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$SearchBodyImpl implements _SearchBody {
   const _$SearchBodyImpl(
       {required this.context, this.query, this.params, this.continuation});

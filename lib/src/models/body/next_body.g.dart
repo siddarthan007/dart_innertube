@@ -20,10 +20,11 @@ _$NextBodyImpl _$$NextBodyImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$NextBodyImplToJson(_$NextBodyImpl instance) =>
     <String, dynamic>{
       'context': instance.context,
-      'videoId': instance.videoId,
-      'playlistId': instance.playlistId,
-      'playlistSetVideoId': instance.playlistSetVideoId,
-      'index': instance.index,
-      'params': instance.params,
-      'continuation': instance.continuation,
+      if (instance.videoId case final value?) 'videoId': value,
+      if (instance.playlistId case final value?) 'playlistId': value,
+      if (instance.playlistSetVideoId case final value?)
+        'playlistSetVideoId': value,
+      if (instance.index case final value?) 'index': value,
+      if (instance.params case final value?) 'params': value,
+      if (instance.continuation case final value?) 'continuation': value,
     };

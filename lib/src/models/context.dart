@@ -5,6 +5,7 @@ part 'context.g.dart';
 
 @freezed
 class Context with _$Context {
+  @JsonSerializable(includeIfNull: false)
   const factory Context({
     required ContextClient client,
     ContextThirdParty? thirdParty,

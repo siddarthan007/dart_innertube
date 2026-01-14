@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../tabs.dart';
+import '../section_list_renderer.dart';
 import '../music_responsive_list_item_renderer.dart';
 import '../continuation.dart';
 
@@ -21,6 +22,7 @@ class SearchResponse with _$SearchResponse {
 class SearchContents with _$SearchContents {
   const factory SearchContents({
     Tabs? tabbedSearchResultsRenderer,
+    SectionListRenderer? sectionListRenderer,
   }) = _SearchContents;
 
   factory SearchContents.fromJson(Map<String, dynamic> json) =>

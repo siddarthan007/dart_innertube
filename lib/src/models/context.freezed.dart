@@ -199,7 +199,8 @@ class __$$ContextImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$ContextImpl implements _Context {
   const _$ContextImpl(
       {required this.client,

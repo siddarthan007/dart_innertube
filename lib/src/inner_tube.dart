@@ -42,6 +42,9 @@ class InnerTube {
 
   YouTubeLocale locale = const YouTubeLocale(gl: 'US', hl: 'en');
 
+  // Expose Dio for helper classes
+  Dio get dio => _dio;
+
   String? get proxy => _proxy;
   set proxy(String? value) {
     _proxy = value;
@@ -139,8 +142,8 @@ class InnerTube {
 
     final headers = await _headers(client, setLogin: setLogin);
 
-    // Remove nulls to match Kotlin's explicitNulls = false behavior
-    final cleanedBody = _removeNulls(bodyJson);
+    // Remove nulls is handled by JsonSerializable or manually
+    final cleanedBody = bodyJson;
 
     try {
       final response = await _dio.post(
@@ -274,28 +277,6 @@ class InnerTube {
       (json) => PlayerResponse.fromJson(json),
       setLogin: true,
     );
-  }
-
-  /// Recursively removes null values from a map to match Kotlin's explicitNulls = false behavior
-  Map<String, dynamic> _removeNulls(Map<String, dynamic> map) {
-    final result = <String, dynamic>{};
-    for (final entry in map.entries) {
-      if (entry.value != null) {
-        if (entry.value is Map<String, dynamic>) {
-          result[entry.key] = _removeNulls(entry.value as Map<String, dynamic>);
-        } else if (entry.value is List) {
-          result[entry.key] = (entry.value as List).map((item) {
-            if (item is Map<String, dynamic>) {
-              return _removeNulls(item);
-            }
-            return item;
-          }).toList();
-        } else {
-          result[entry.key] = entry.value;
-        }
-      }
-    }
-    return result;
   }
 
   // ===== Next =====

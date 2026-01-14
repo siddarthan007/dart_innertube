@@ -27,7 +27,7 @@ class PlaylistPage {
 
     if (contents == null || contents.isEmpty) return null;
 
-    // Find Header
+    // Find Header (in primary contents like Kotlin)
     final headerContent = contents.firstWhereOrNull((c) =>
         c.musicResponsiveHeaderRenderer != null ||
         c.musicEditablePlaylistDetailHeaderRenderer != null);
@@ -36,10 +36,14 @@ class PlaylistPage {
         headerContent?.musicEditablePlaylistDetailHeaderRenderer?.header
             .musicResponsiveHeaderRenderer;
 
-    // Find Shelf (Songs)
-    final shelfContent =
-        contents.firstWhereOrNull((c) => c.musicPlaylistShelfRenderer != null);
-    final musicPlaylistShelfRenderer = shelfContent?.musicPlaylistShelfRenderer;
+    // Find Shelf (Songs) - Kotlin looks in secondaryContents!
+    final secondaryContents =
+        response.contents?.twoColumnBrowseResultsRenderer?.secondaryContents;
+    final secondarySectionListRenderer = secondaryContents?.sectionListRenderer;
+
+    // Get musicPlaylistShelfRenderer from secondaryContents (Kotlin approach)
+    final musicPlaylistShelfRenderer = secondarySectionListRenderer
+        ?.contents?.firstOrNull?.musicPlaylistShelfRenderer;
 
     if (header == null && musicPlaylistShelfRenderer == null) return null;
 
@@ -56,8 +60,18 @@ class PlaylistPage {
             .toList() ??
         [];
 
+    // Get continuation from shelf or contents (Kotlin approach)
     final continuation = musicPlaylistShelfRenderer
-        ?.continuations?.firstOrNull?.nextContinuationData?.continuation;
+            ?.continuations?.firstOrNull?.nextContinuationData?.continuation ??
+        musicPlaylistShelfRenderer
+            ?.contents
+            ?.lastOrNull
+            ?.continuationItemRenderer
+            ?.continuationEndpoint
+            ?.continuationCommand
+            ?.token ??
+        secondarySectionListRenderer
+            ?.continuations?.firstOrNull?.nextContinuationData?.continuation;
 
     return PlaylistPage(
       playlist: PlaylistItem(

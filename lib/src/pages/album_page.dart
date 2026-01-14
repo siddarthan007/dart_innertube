@@ -3,6 +3,7 @@ import '../models/yt_item.dart';
 import '../models/response/browse_response.dart';
 import '../models/music_responsive_list_item_renderer.dart';
 import '../models/music_responsive_header_renderer.dart';
+import '../models/runs.dart';
 import '../utils/utils.dart'; // for parseTime
 import 'page_helper.dart';
 
@@ -35,18 +36,20 @@ class AlbumPage {
       playlistId: playlistId,
       title: title,
       artists: header?.straplineTextOne?.runs
-              ?.whereIndexed((i, _) => i % 2 == 0)
+              ?.oddElements()
               .map((r) => Artist(
                   name: r.text,
                   id: r.navigationEndpoint?.browseEndpoint?.browseId))
               .toList() ??
           response.header?.musicDetailHeaderRenderer?.subtitle.runs
-              ?.whereIndexed((i, _) => i % 2 == 0 && i > 0)
+              ?.splitBySeparator()
+              .elementAtOrNull(1)
+              ?.oddElements()
               .map((r) => Artist(
                   name: r.text,
                   id: r.navigationEndpoint?.browseEndpoint?.browseId))
               .toList() ??
-          [], // Simplified extraction
+          [],
       year: int.tryParse(header?.subtitle.runs?.lastOrNull?.text ??
           response.header?.musicDetailHeaderRenderer?.subtitle.runs?.lastOrNull
               ?.text ??

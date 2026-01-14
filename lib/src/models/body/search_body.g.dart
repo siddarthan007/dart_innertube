@@ -17,7 +17,7 @@ _$SearchBodyImpl _$$SearchBodyImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$SearchBodyImplToJson(_$SearchBodyImpl instance) =>
     <String, dynamic>{
       'context': instance.context,
-      'query': instance.query,
-      'params': instance.params,
-      'continuation': instance.continuation,
+      if (instance.query case final value?) 'query': value,
+      if (instance.params case final value?) 'params': value,
+      if (instance.continuation case final value?) 'continuation': value,
     };

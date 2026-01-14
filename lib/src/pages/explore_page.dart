@@ -16,7 +16,8 @@ class ExplorePage {
     List<AlbumItem> newReleaseAlbums = [];
     List<MoodAndGenresItem> moodAndGenres = [];
 
-    final tabs = response.contents?.singleColumnBrowseResultsRenderer?.tabs;
+    final tabs = response.contents?.singleColumnBrowseResultsRenderer?.tabs ??
+        response.contents?.twoColumnBrowseResultsRenderer?.tabs;
     if (tabs == null || tabs.isEmpty) {
       return ExplorePage(
           newReleaseAlbums: newReleaseAlbums, moodAndGenres: moodAndGenres);

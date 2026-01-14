@@ -6,6 +6,7 @@ part 'next_body.g.dart';
 
 @freezed
 class NextBody with _$NextBody {
+  @JsonSerializable(includeIfNull: false)
   const factory NextBody({
     required Context context,
     String? videoId,

@@ -104,7 +104,8 @@ class HomePage {
   });
 
   static HomePage? fromResponse(BrowseResponse response) {
-    final tabs = response.contents?.singleColumnBrowseResultsRenderer?.tabs;
+    final tabs = response.contents?.singleColumnBrowseResultsRenderer?.tabs ??
+        response.contents?.twoColumnBrowseResultsRenderer?.tabs;
     final tabRenderer = tabs?.firstOrNull?.tabRenderer;
     final sectionListRenderer = tabRenderer?.content?.sectionListRenderer;
 

@@ -1463,8 +1463,7 @@ class __$$SectionListContentImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class _$SectionListContentImpl extends _SectionListContent {
   const _$SectionListContentImpl(
       {this.musicCarouselShelfRenderer,

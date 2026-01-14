@@ -30,12 +30,17 @@ _$SearchContentsImpl _$$SearchContentsImplFromJson(Map<String, dynamic> json) =>
           ? null
           : Tabs.fromJson(
               json['tabbedSearchResultsRenderer'] as Map<String, dynamic>),
+      sectionListRenderer: json['sectionListRenderer'] == null
+          ? null
+          : SectionListRenderer.fromJson(
+              json['sectionListRenderer'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$SearchContentsImplToJson(
         _$SearchContentsImpl instance) =>
     <String, dynamic>{
       'tabbedSearchResultsRenderer': instance.tabbedSearchResultsRenderer,
+      'sectionListRenderer': instance.sectionListRenderer,
     };
 
 _$SearchContinuationContentsImpl _$$SearchContinuationContentsImplFromJson(

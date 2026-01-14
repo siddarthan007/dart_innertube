@@ -31,6 +31,7 @@ import 'pages/artist_items_page.dart';
 import 'pages/search_summary_page.dart';
 import 'models/media_info.dart';
 import 'utils/utils.dart';
+import 'utils/player_helper.dart';
 import 'constants.dart';
 
 /// Main YouTube Music client - equivalent to the Kotlin YouTube object
@@ -193,22 +194,8 @@ class YouTube {
       query: query,
       params: filter,
     );
-
-    final tabs = response.contents?.tabbedSearchResultsRenderer?.tabs;
-    final contents = tabs?.firstOrNull?.tabRenderer.content?.sectionListRenderer
-        ?.contents?.lastOrNull?.musicShelfRenderer?.contents;
-
-    final items = contents
-            ?.map((c) => c.musicResponsiveListItemRenderer)
-            .nonNulls
-            .map((r) => SearchPage.toYTItem(r))
-            .nonNulls
-            .toList() ??
-        [];
-
-    final continuation = contents?.getContinuation();
-
-    return SearchResult(items: items, continuation: continuation);
+    final page = SearchPage.fromResponse(response);
+    return SearchResult(items: page.items, continuation: page.continuation);
   }
 
   Future<SearchResult> searchContinuation(String continuation) async {
@@ -216,7 +203,6 @@ class YouTube {
       YouTubeClient.webRemix,
       continuation: continuation,
     );
-
     final contents =
         response.continuationContents?.musicShelfContinuation.contents;
     final items = contents
@@ -676,12 +662,47 @@ class YouTube {
     YouTubeClient? client,
     int? signatureTimestamp,
   }) async {
-    return _innerTube.player(
+    final sts = signatureTimestamp ??
+        await PlayerHelper.getSignatureTimestamp(_innerTube.dio);
+
+    final response = await _innerTube.player(
       client ?? YouTubeClient.webRemix,
       videoId: videoId,
       playlistId: playlistId,
-      signatureTimestamp: signatureTimestamp,
+      signatureTimestamp: sts,
     );
+
+    if (response.streamingData != null) {
+      Future<List<Format>> decipherFormats(List<Format> formats) async {
+        final decoded = <Format>[];
+        for (final f in formats) {
+          if (f.url == null && f.signatureCipher != null) {
+            final newUrl =
+                await PlayerHelper.decipher(f.signatureCipher!, _innerTube.dio);
+            decoded.add(f.copyWith(url: newUrl, signatureCipher: null));
+          } else {
+            decoded.add(f);
+          }
+        }
+        return decoded;
+      }
+
+      final formats = response.streamingData!.formats;
+      final adaptives = response.streamingData!.adaptiveFormats;
+
+      final newFormats =
+          formats != null ? await decipherFormats(formats) : null;
+      final newAdaptives = await decipherFormats(adaptives);
+
+      return response.copyWith(
+        streamingData: response.streamingData!.copyWith(
+          formats: newFormats,
+          adaptiveFormats: newAdaptives,
+        ),
+      );
+    }
+
+    return response;
   }
 
   // ===== Next =====
@@ -792,6 +813,26 @@ class YouTube {
       title: title,
       items: items,
       currentIndex: currentIndex >= 0 ? currentIndex : null,
+      lyricsEndpoint: response
+          .contents
+          .singleColumnMusicWatchNextResultsRenderer
+          ?.tabbedRenderer
+          .watchNextTabbedResultsRenderer
+          ?.tabs
+          .elementAtOrNull(1)
+          ?.tabRenderer
+          .endpoint
+          ?.browseEndpoint,
+      relatedEndpoint: response
+          .contents
+          .singleColumnMusicWatchNextResultsRenderer
+          ?.tabbedRenderer
+          .watchNextTabbedResultsRenderer
+          ?.tabs
+          .elementAtOrNull(2)
+          ?.tabRenderer
+          .endpoint
+          ?.browseEndpoint,
       continuation: playlistPanelRenderer.continuations?.getContinuation(),
       endpoint: endpoint,
     );
@@ -831,10 +872,29 @@ class YouTube {
                     content.musicTwoRowItemRenderer!)
                 : null;
 
-        if (item is SongItem) songs.add(item);
-        if (item is AlbumItem) albums.add(item);
-        if (item is ArtistItem) artists.add(item);
-        if (item is PlaylistItem) playlists.add(item);
+        // Filter songs by musicVideoType like in Kotlin implementation
+        if (item is SongItem) {
+          final musicVideoType = content
+              .musicResponsiveListItemRenderer
+              ?.overlay
+              ?.musicItemThumbnailOverlayRenderer
+              .content
+              .musicPlayButtonRenderer
+              .playNavigationEndpoint
+              ?.watchEndpoint
+              ?.watchEndpointMusicSupportedConfigs
+              ?.watchEndpointMusicConfig
+              .musicVideoType;
+          if (musicVideoType == WatchEndpointMusicConfig.musicVideoTypeAtv) {
+            songs.add(item);
+          }
+        } else if (item is AlbumItem) {
+          albums.add(item);
+        } else if (item is ArtistItem) {
+          artists.add(item);
+        } else if (item is PlaylistItem) {
+          playlists.add(item);
+        }
       });
     });
 
@@ -1129,64 +1189,76 @@ class YouTube {
   // ===== Artist Items Continuation =====
   Future<ArtistItemsContinuationPage> artistItemsContinuation(
       String continuation) async {
-    final response = await _innerTube.browse(
-      YouTubeClient.webRemix,
-      continuation: continuation,
-    );
+    try {
+      final response = await _innerTube.browse(
+        YouTubeClient.webRemix,
+        continuation: continuation,
+      );
 
-    if (response.continuationContents?.gridContinuation != null) {
-      final gridContinuation = response.continuationContents!.gridContinuation!;
+      if (response.continuationContents?.gridContinuation != null) {
+        final gridContinuation =
+            response.continuationContents!.gridContinuation!;
+        return ArtistItemsContinuationPage(
+          items: gridContinuation.items
+              .map((i) => i.musicTwoRowItemRenderer)
+              .nonNulls
+              .map((r) => ArtistItemsPage.fromMusicTwoRowItemRenderer(r))
+              .nonNulls
+              .toList(),
+          continuation: gridContinuation.continuations?.getContinuation(),
+        );
+      } else if (response
+              .continuationContents?.musicPlaylistShelfContinuation !=
+          null) {
+        final shelfContinuation =
+            response.continuationContents!.musicPlaylistShelfContinuation!;
+        return ArtistItemsContinuationPage(
+          items: shelfContinuation.contents
+              .getItems()
+              .map((it) =>
+                  ArtistItemsPage.fromMusicResponsiveListItemRenderer(it))
+              .nonNulls
+              .toList(),
+          continuation: shelfContinuation.continuations?.getContinuation(),
+        );
+      } else if (response.continuationContents?.musicShelfContinuation !=
+          null) {
+        final shelfContinuation =
+            response.continuationContents!.musicShelfContinuation!;
+        return ArtistItemsContinuationPage(
+          items: shelfContinuation.contents
+                  ?.getItems()
+                  .map((it) =>
+                      ArtistItemsPage.fromMusicResponsiveListItemRenderer(it))
+                  .nonNulls
+                  .toList() ??
+              [],
+          continuation: shelfContinuation.continuations?.getContinuation(),
+        );
+      } else {
+        final continuationItems = response
+                .onResponseReceivedActions
+                ?.firstOrNull
+                ?.appendContinuationItemsAction
+                ?.continuationItems
+                ?.continuationItems ??
+            <MusicShelfContent>[];
+        return ArtistItemsContinuationPage(
+          items: continuationItems
+              .getItems()
+              .map((it) =>
+                  ArtistItemsPage.fromMusicResponsiveListItemRenderer(it))
+              .nonNulls
+              .toList(),
+          continuation: continuationItems.getContinuation(),
+        );
+      }
+    } catch (e) {
+      // If deserialization fails, return empty result
+      // This can happen with some continuation types that have unexpected structure
       return ArtistItemsContinuationPage(
-        items: gridContinuation.items
-            .map((i) => i.musicTwoRowItemRenderer)
-            .nonNulls
-            .map((r) => ArtistItemsPage.fromMusicTwoRowItemRenderer(r))
-            .nonNulls
-            .toList(),
-        continuation: gridContinuation.continuations?.getContinuation(),
-      );
-    } else if (response.continuationContents?.musicPlaylistShelfContinuation !=
-        null) {
-      final shelfContinuation =
-          response.continuationContents!.musicPlaylistShelfContinuation!;
-      return ArtistItemsContinuationPage(
-        items: shelfContinuation.contents
-            .getItems()
-            .map(
-                (it) => ArtistItemsPage.fromMusicResponsiveListItemRenderer(it))
-            .nonNulls
-            .toList(),
-        continuation: shelfContinuation.continuations?.getContinuation(),
-      );
-    } else if (response.continuationContents?.musicShelfContinuation != null) {
-      final shelfContinuation =
-          response.continuationContents!.musicShelfContinuation!;
-      return ArtistItemsContinuationPage(
-        items: shelfContinuation.contents
-                ?.getItems()
-                .map((it) =>
-                    ArtistItemsPage.fromMusicResponsiveListItemRenderer(it))
-                .nonNulls
-                .toList() ??
-            [],
-        continuation: shelfContinuation.continuations?.getContinuation(),
-      );
-    } else {
-      final continuationItems = response
-              .onResponseReceivedActions
-              ?.firstOrNull
-              ?.appendContinuationItemsAction
-              ?.continuationItems
-              ?.continuationItems ??
-          <MusicShelfContent>[];
-      return ArtistItemsContinuationPage(
-        items: continuationItems
-            .getItems()
-            .map(
-                (it) => ArtistItemsPage.fromMusicResponsiveListItemRenderer(it))
-            .nonNulls
-            .toList(),
-        continuation: continuationItems.getContinuation(),
+        items: [],
+        continuation: null,
       );
     }
   }

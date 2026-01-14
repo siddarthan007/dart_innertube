@@ -197,7 +197,8 @@ class __$$NextBodyImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$NextBodyImpl implements _NextBody {
   const _$NextBodyImpl(
       {required this.context,

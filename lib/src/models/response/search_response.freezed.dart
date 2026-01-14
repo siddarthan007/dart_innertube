@@ -234,6 +234,8 @@ SearchContents _$SearchContentsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SearchContents {
   Tabs? get tabbedSearchResultsRenderer => throw _privateConstructorUsedError;
+  SectionListRenderer? get sectionListRenderer =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this SearchContents to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -251,9 +253,12 @@ abstract class $SearchContentsCopyWith<$Res> {
           SearchContents value, $Res Function(SearchContents) then) =
       _$SearchContentsCopyWithImpl<$Res, SearchContents>;
   @useResult
-  $Res call({Tabs? tabbedSearchResultsRenderer});
+  $Res call(
+      {Tabs? tabbedSearchResultsRenderer,
+      SectionListRenderer? sectionListRenderer});
 
   $TabsCopyWith<$Res>? get tabbedSearchResultsRenderer;
+  $SectionListRendererCopyWith<$Res>? get sectionListRenderer;
 }
 
 /// @nodoc
@@ -272,12 +277,17 @@ class _$SearchContentsCopyWithImpl<$Res, $Val extends SearchContents>
   @override
   $Res call({
     Object? tabbedSearchResultsRenderer = freezed,
+    Object? sectionListRenderer = freezed,
   }) {
     return _then(_value.copyWith(
       tabbedSearchResultsRenderer: freezed == tabbedSearchResultsRenderer
           ? _value.tabbedSearchResultsRenderer
           : tabbedSearchResultsRenderer // ignore: cast_nullable_to_non_nullable
               as Tabs?,
+      sectionListRenderer: freezed == sectionListRenderer
+          ? _value.sectionListRenderer
+          : sectionListRenderer // ignore: cast_nullable_to_non_nullable
+              as SectionListRenderer?,
     ) as $Val);
   }
 
@@ -294,6 +304,21 @@ class _$SearchContentsCopyWithImpl<$Res, $Val extends SearchContents>
       return _then(_value.copyWith(tabbedSearchResultsRenderer: value) as $Val);
     });
   }
+
+  /// Create a copy of SearchContents
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SectionListRendererCopyWith<$Res>? get sectionListRenderer {
+    if (_value.sectionListRenderer == null) {
+      return null;
+    }
+
+    return $SectionListRendererCopyWith<$Res>(_value.sectionListRenderer!,
+        (value) {
+      return _then(_value.copyWith(sectionListRenderer: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -304,10 +329,14 @@ abstract class _$$SearchContentsImplCopyWith<$Res>
       __$$SearchContentsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Tabs? tabbedSearchResultsRenderer});
+  $Res call(
+      {Tabs? tabbedSearchResultsRenderer,
+      SectionListRenderer? sectionListRenderer});
 
   @override
   $TabsCopyWith<$Res>? get tabbedSearchResultsRenderer;
+  @override
+  $SectionListRendererCopyWith<$Res>? get sectionListRenderer;
 }
 
 /// @nodoc
@@ -324,12 +353,17 @@ class __$$SearchContentsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? tabbedSearchResultsRenderer = freezed,
+    Object? sectionListRenderer = freezed,
   }) {
     return _then(_$SearchContentsImpl(
       tabbedSearchResultsRenderer: freezed == tabbedSearchResultsRenderer
           ? _value.tabbedSearchResultsRenderer
           : tabbedSearchResultsRenderer // ignore: cast_nullable_to_non_nullable
               as Tabs?,
+      sectionListRenderer: freezed == sectionListRenderer
+          ? _value.sectionListRenderer
+          : sectionListRenderer // ignore: cast_nullable_to_non_nullable
+              as SectionListRenderer?,
     ));
   }
 }
@@ -337,17 +371,20 @@ class __$$SearchContentsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SearchContentsImpl implements _SearchContents {
-  const _$SearchContentsImpl({this.tabbedSearchResultsRenderer});
+  const _$SearchContentsImpl(
+      {this.tabbedSearchResultsRenderer, this.sectionListRenderer});
 
   factory _$SearchContentsImpl.fromJson(Map<String, dynamic> json) =>
       _$$SearchContentsImplFromJson(json);
 
   @override
   final Tabs? tabbedSearchResultsRenderer;
+  @override
+  final SectionListRenderer? sectionListRenderer;
 
   @override
   String toString() {
-    return 'SearchContents(tabbedSearchResultsRenderer: $tabbedSearchResultsRenderer)';
+    return 'SearchContents(tabbedSearchResultsRenderer: $tabbedSearchResultsRenderer, sectionListRenderer: $sectionListRenderer)';
   }
 
   @override
@@ -358,12 +395,15 @@ class _$SearchContentsImpl implements _SearchContents {
             (identical(other.tabbedSearchResultsRenderer,
                     tabbedSearchResultsRenderer) ||
                 other.tabbedSearchResultsRenderer ==
-                    tabbedSearchResultsRenderer));
+                    tabbedSearchResultsRenderer) &&
+            (identical(other.sectionListRenderer, sectionListRenderer) ||
+                other.sectionListRenderer == sectionListRenderer));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, tabbedSearchResultsRenderer);
+  int get hashCode => Object.hash(
+      runtimeType, tabbedSearchResultsRenderer, sectionListRenderer);
 
   /// Create a copy of SearchContents
   /// with the given fields replaced by the non-null parameter values.
@@ -383,14 +423,17 @@ class _$SearchContentsImpl implements _SearchContents {
 }
 
 abstract class _SearchContents implements SearchContents {
-  const factory _SearchContents({final Tabs? tabbedSearchResultsRenderer}) =
-      _$SearchContentsImpl;
+  const factory _SearchContents(
+      {final Tabs? tabbedSearchResultsRenderer,
+      final SectionListRenderer? sectionListRenderer}) = _$SearchContentsImpl;
 
   factory _SearchContents.fromJson(Map<String, dynamic> json) =
       _$SearchContentsImpl.fromJson;
 
   @override
   Tabs? get tabbedSearchResultsRenderer;
+  @override
+  SectionListRenderer? get sectionListRenderer;
 
   /// Create a copy of SearchContents
   /// with the given fields replaced by the non-null parameter values.

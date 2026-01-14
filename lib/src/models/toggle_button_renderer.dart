@@ -12,8 +12,8 @@ class ToggleButtonRenderer with _$ToggleButtonRenderer {
     required bool isDisabled,
     Runs? defaultText,
     Runs? toggledText,
-    required NavigationEndpoint defaultNavigationEndpoint,
-    required NavigationEndpoint toggledNavigationEndpoint,
+    NavigationEndpoint? defaultNavigationEndpoint,
+    NavigationEndpoint? toggledNavigationEndpoint,
     required String trackingParams,
   }) = _ToggleButtonRenderer;
 

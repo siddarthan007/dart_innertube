@@ -65,7 +65,8 @@ class ChartsPage {
   static ChartsPage fromResponse(BrowseResponse response) {
     final sections = <ChartSection>[];
 
-    final tabs = response.contents?.singleColumnBrowseResultsRenderer?.tabs;
+    final tabs = response.contents?.singleColumnBrowseResultsRenderer?.tabs ??
+        response.contents?.twoColumnBrowseResultsRenderer?.tabs;
     if (tabs == null || tabs.isEmpty) {
       return ChartsPage(sections: []);
     }

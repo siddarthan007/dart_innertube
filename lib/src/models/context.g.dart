@@ -24,7 +24,7 @@ _$ContextImpl _$$ContextImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$ContextImplToJson(_$ContextImpl instance) =>
     <String, dynamic>{
       'client': instance.client,
-      'thirdParty': instance.thirdParty,
+      if (instance.thirdParty case final value?) 'thirdParty': value,
       'request': instance.request,
       'user': instance.user,
     };

@@ -6,6 +6,7 @@ part 'search_body.g.dart';
 
 @freezed
 class SearchBody with _$SearchBody {
+  @JsonSerializable(includeIfNull: false)
   const factory SearchBody({
     required Context context,
     String? query,

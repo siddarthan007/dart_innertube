@@ -24,9 +24,9 @@ mixin _$ToggleButtonRenderer {
   bool get isDisabled => throw _privateConstructorUsedError;
   Runs? get defaultText => throw _privateConstructorUsedError;
   Runs? get toggledText => throw _privateConstructorUsedError;
-  NavigationEndpoint get defaultNavigationEndpoint =>
+  NavigationEndpoint? get defaultNavigationEndpoint =>
       throw _privateConstructorUsedError;
-  NavigationEndpoint get toggledNavigationEndpoint =>
+  NavigationEndpoint? get toggledNavigationEndpoint =>
       throw _privateConstructorUsedError;
   String get trackingParams => throw _privateConstructorUsedError;
 
@@ -51,14 +51,14 @@ abstract class $ToggleButtonRendererCopyWith<$Res> {
       bool isDisabled,
       Runs? defaultText,
       Runs? toggledText,
-      NavigationEndpoint defaultNavigationEndpoint,
-      NavigationEndpoint toggledNavigationEndpoint,
+      NavigationEndpoint? defaultNavigationEndpoint,
+      NavigationEndpoint? toggledNavigationEndpoint,
       String trackingParams});
 
   $RunsCopyWith<$Res>? get defaultText;
   $RunsCopyWith<$Res>? get toggledText;
-  $NavigationEndpointCopyWith<$Res> get defaultNavigationEndpoint;
-  $NavigationEndpointCopyWith<$Res> get toggledNavigationEndpoint;
+  $NavigationEndpointCopyWith<$Res>? get defaultNavigationEndpoint;
+  $NavigationEndpointCopyWith<$Res>? get toggledNavigationEndpoint;
 }
 
 /// @nodoc
@@ -81,8 +81,8 @@ class _$ToggleButtonRendererCopyWithImpl<$Res,
     Object? isDisabled = null,
     Object? defaultText = freezed,
     Object? toggledText = freezed,
-    Object? defaultNavigationEndpoint = null,
-    Object? toggledNavigationEndpoint = null,
+    Object? defaultNavigationEndpoint = freezed,
+    Object? toggledNavigationEndpoint = freezed,
     Object? trackingParams = null,
   }) {
     return _then(_value.copyWith(
@@ -102,14 +102,14 @@ class _$ToggleButtonRendererCopyWithImpl<$Res,
           ? _value.toggledText
           : toggledText // ignore: cast_nullable_to_non_nullable
               as Runs?,
-      defaultNavigationEndpoint: null == defaultNavigationEndpoint
+      defaultNavigationEndpoint: freezed == defaultNavigationEndpoint
           ? _value.defaultNavigationEndpoint
           : defaultNavigationEndpoint // ignore: cast_nullable_to_non_nullable
-              as NavigationEndpoint,
-      toggledNavigationEndpoint: null == toggledNavigationEndpoint
+              as NavigationEndpoint?,
+      toggledNavigationEndpoint: freezed == toggledNavigationEndpoint
           ? _value.toggledNavigationEndpoint
           : toggledNavigationEndpoint // ignore: cast_nullable_to_non_nullable
-              as NavigationEndpoint,
+              as NavigationEndpoint?,
       trackingParams: null == trackingParams
           ? _value.trackingParams
           : trackingParams // ignore: cast_nullable_to_non_nullable
@@ -149,8 +149,12 @@ class _$ToggleButtonRendererCopyWithImpl<$Res,
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $NavigationEndpointCopyWith<$Res> get defaultNavigationEndpoint {
-    return $NavigationEndpointCopyWith<$Res>(_value.defaultNavigationEndpoint,
+  $NavigationEndpointCopyWith<$Res>? get defaultNavigationEndpoint {
+    if (_value.defaultNavigationEndpoint == null) {
+      return null;
+    }
+
+    return $NavigationEndpointCopyWith<$Res>(_value.defaultNavigationEndpoint!,
         (value) {
       return _then(_value.copyWith(defaultNavigationEndpoint: value) as $Val);
     });
@@ -160,8 +164,12 @@ class _$ToggleButtonRendererCopyWithImpl<$Res,
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $NavigationEndpointCopyWith<$Res> get toggledNavigationEndpoint {
-    return $NavigationEndpointCopyWith<$Res>(_value.toggledNavigationEndpoint,
+  $NavigationEndpointCopyWith<$Res>? get toggledNavigationEndpoint {
+    if (_value.toggledNavigationEndpoint == null) {
+      return null;
+    }
+
+    return $NavigationEndpointCopyWith<$Res>(_value.toggledNavigationEndpoint!,
         (value) {
       return _then(_value.copyWith(toggledNavigationEndpoint: value) as $Val);
     });
@@ -181,8 +189,8 @@ abstract class _$$ToggleButtonRendererImplCopyWith<$Res>
       bool isDisabled,
       Runs? defaultText,
       Runs? toggledText,
-      NavigationEndpoint defaultNavigationEndpoint,
-      NavigationEndpoint toggledNavigationEndpoint,
+      NavigationEndpoint? defaultNavigationEndpoint,
+      NavigationEndpoint? toggledNavigationEndpoint,
       String trackingParams});
 
   @override
@@ -190,9 +198,9 @@ abstract class _$$ToggleButtonRendererImplCopyWith<$Res>
   @override
   $RunsCopyWith<$Res>? get toggledText;
   @override
-  $NavigationEndpointCopyWith<$Res> get defaultNavigationEndpoint;
+  $NavigationEndpointCopyWith<$Res>? get defaultNavigationEndpoint;
   @override
-  $NavigationEndpointCopyWith<$Res> get toggledNavigationEndpoint;
+  $NavigationEndpointCopyWith<$Res>? get toggledNavigationEndpoint;
 }
 
 /// @nodoc
@@ -212,8 +220,8 @@ class __$$ToggleButtonRendererImplCopyWithImpl<$Res>
     Object? isDisabled = null,
     Object? defaultText = freezed,
     Object? toggledText = freezed,
-    Object? defaultNavigationEndpoint = null,
-    Object? toggledNavigationEndpoint = null,
+    Object? defaultNavigationEndpoint = freezed,
+    Object? toggledNavigationEndpoint = freezed,
     Object? trackingParams = null,
   }) {
     return _then(_$ToggleButtonRendererImpl(
@@ -233,14 +241,14 @@ class __$$ToggleButtonRendererImplCopyWithImpl<$Res>
           ? _value.toggledText
           : toggledText // ignore: cast_nullable_to_non_nullable
               as Runs?,
-      defaultNavigationEndpoint: null == defaultNavigationEndpoint
+      defaultNavigationEndpoint: freezed == defaultNavigationEndpoint
           ? _value.defaultNavigationEndpoint
           : defaultNavigationEndpoint // ignore: cast_nullable_to_non_nullable
-              as NavigationEndpoint,
-      toggledNavigationEndpoint: null == toggledNavigationEndpoint
+              as NavigationEndpoint?,
+      toggledNavigationEndpoint: freezed == toggledNavigationEndpoint
           ? _value.toggledNavigationEndpoint
           : toggledNavigationEndpoint // ignore: cast_nullable_to_non_nullable
-              as NavigationEndpoint,
+              as NavigationEndpoint?,
       trackingParams: null == trackingParams
           ? _value.trackingParams
           : trackingParams // ignore: cast_nullable_to_non_nullable
@@ -257,8 +265,8 @@ class _$ToggleButtonRendererImpl implements _ToggleButtonRenderer {
       required this.isDisabled,
       this.defaultText,
       this.toggledText,
-      required this.defaultNavigationEndpoint,
-      required this.toggledNavigationEndpoint,
+      this.defaultNavigationEndpoint,
+      this.toggledNavigationEndpoint,
       required this.trackingParams});
 
   factory _$ToggleButtonRendererImpl.fromJson(Map<String, dynamic> json) =>
@@ -273,9 +281,9 @@ class _$ToggleButtonRendererImpl implements _ToggleButtonRenderer {
   @override
   final Runs? toggledText;
   @override
-  final NavigationEndpoint defaultNavigationEndpoint;
+  final NavigationEndpoint? defaultNavigationEndpoint;
   @override
-  final NavigationEndpoint toggledNavigationEndpoint;
+  final NavigationEndpoint? toggledNavigationEndpoint;
   @override
   final String trackingParams;
 
@@ -343,8 +351,8 @@ abstract class _ToggleButtonRenderer implements ToggleButtonRenderer {
       required final bool isDisabled,
       final Runs? defaultText,
       final Runs? toggledText,
-      required final NavigationEndpoint defaultNavigationEndpoint,
-      required final NavigationEndpoint toggledNavigationEndpoint,
+      final NavigationEndpoint? defaultNavigationEndpoint,
+      final NavigationEndpoint? toggledNavigationEndpoint,
       required final String trackingParams}) = _$ToggleButtonRendererImpl;
 
   factory _ToggleButtonRenderer.fromJson(Map<String, dynamic> json) =
@@ -359,9 +367,9 @@ abstract class _ToggleButtonRenderer implements ToggleButtonRenderer {
   @override
   Runs? get toggledText;
   @override
-  NavigationEndpoint get defaultNavigationEndpoint;
+  NavigationEndpoint? get defaultNavigationEndpoint;
   @override
-  NavigationEndpoint get toggledNavigationEndpoint;
+  NavigationEndpoint? get toggledNavigationEndpoint;
   @override
   String get trackingParams;
 
