@@ -18,6 +18,49 @@ class ChartsPage {
 
   ChartsPage({required this.sections});
 
+  /// Convenience getter for top songs (from Top/Trending sections with SongItems)
+  List<SongItem> get songs {
+    final items = <SongItem>[];
+    for (final section in sections) {
+      if (section.type == ChartType.top || section.type == ChartType.trending) {
+        items.addAll(section.items.whereType<SongItem>());
+      }
+    }
+    return items;
+  }
+
+  /// Convenience getter for video items
+  List<SongItem> get videos {
+    final items = <SongItem>[];
+    for (final section in sections) {
+      for (final item in section.items) {
+        if (item is SongItem && item.isVideoSong) {
+          items.add(item);
+        }
+      }
+    }
+    return items.isEmpty ? songs : items; // Fallback to songs if no videos
+  }
+
+  /// Convenience getter for artist items
+  List<ArtistItem> get artists {
+    final items = <ArtistItem>[];
+    for (final section in sections) {
+      items.addAll(section.items.whereType<ArtistItem>());
+    }
+    return items;
+  }
+
+  /// Convenience getter for trending items
+  List<YTItem> get trending {
+    for (final section in sections) {
+      if (section.type == ChartType.trending) {
+        return section.items;
+      }
+    }
+    return sections.isNotEmpty ? sections.first.items : [];
+  }
+
   static ChartsPage fromResponse(BrowseResponse response) {
     final sections = <ChartSection>[];
 
