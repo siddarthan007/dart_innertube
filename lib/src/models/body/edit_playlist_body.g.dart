@@ -34,6 +34,14 @@ _$PlaylistActionImpl _$$PlaylistActionImplFromJson(Map<String, dynamic> json) =>
       movedSetVideoIdSuccessor: json['movedSetVideoIdSuccessor'] as String?,
       playlistName: json['playlistName'] as String?,
       playlistDescription: json['playlistDescription'] as String?,
+      addedCustomThumbnail: json['addedCustomThumbnail'] == null
+          ? null
+          : PlaylistActionCustomThumbnail.fromJson(
+              json['addedCustomThumbnail'] as Map<String, dynamic>),
+      deletedCustomThumbnail: json['deletedCustomThumbnail'] == null
+          ? null
+          : PlaylistActionDeletedThumbnail.fromJson(
+              json['deletedCustomThumbnail'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$PlaylistActionImplToJson(
@@ -47,4 +55,53 @@ Map<String, dynamic> _$$PlaylistActionImplToJson(
       'movedSetVideoIdSuccessor': instance.movedSetVideoIdSuccessor,
       'playlistName': instance.playlistName,
       'playlistDescription': instance.playlistDescription,
+      'addedCustomThumbnail': instance.addedCustomThumbnail,
+      'deletedCustomThumbnail': instance.deletedCustomThumbnail,
+    };
+
+_$PlaylistActionCustomThumbnailImpl
+    _$$PlaylistActionCustomThumbnailImplFromJson(Map<String, dynamic> json) =>
+        _$PlaylistActionCustomThumbnailImpl(
+          imageKey: json['imageKey'] == null
+              ? const PlaylistActionImageKey()
+              : PlaylistActionImageKey.fromJson(
+                  json['imageKey'] as Map<String, dynamic>),
+          playlistScottyEncryptedBlobId:
+              json['playlistScottyEncryptedBlobId'] as String,
+        );
+
+Map<String, dynamic> _$$PlaylistActionCustomThumbnailImplToJson(
+        _$PlaylistActionCustomThumbnailImpl instance) =>
+    <String, dynamic>{
+      'imageKey': instance.imageKey,
+      'playlistScottyEncryptedBlobId': instance.playlistScottyEncryptedBlobId,
+    };
+
+_$PlaylistActionImageKeyImpl _$$PlaylistActionImageKeyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PlaylistActionImageKeyImpl(
+      name: json['name'] as String? ?? 'studio_square_thumbnail',
+      type: json['type'] as String? ?? 'PLAYLIST_IMAGE_TYPE_CUSTOM_THUMBNAIL',
+    );
+
+Map<String, dynamic> _$$PlaylistActionImageKeyImplToJson(
+        _$PlaylistActionImageKeyImpl instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'type': instance.type,
+    };
+
+_$PlaylistActionDeletedThumbnailImpl
+    _$$PlaylistActionDeletedThumbnailImplFromJson(Map<String, dynamic> json) =>
+        _$PlaylistActionDeletedThumbnailImpl(
+          name: json['name'] as String? ?? 'studio_square_thumbnail',
+          type:
+              json['type'] as String? ?? 'PLAYLIST_IMAGE_TYPE_CUSTOM_THUMBNAIL',
+        );
+
+Map<String, dynamic> _$$PlaylistActionDeletedThumbnailImplToJson(
+        _$PlaylistActionDeletedThumbnailImpl instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'type': instance.type,
     };

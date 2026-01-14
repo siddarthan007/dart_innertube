@@ -1047,6 +1047,9 @@ SectionListContent _$SectionListContentFromJson(Map<String, dynamic> json) {
 mixin _$SectionListContent {
   MusicCarouselShelfRenderer? get musicCarouselShelfRenderer =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: 'musicImmersiveCarouselShelfRenderer')
+  MusicCarouselShelfRenderer? get musicImmersiveCarouselShelfRenderer =>
+      throw _privateConstructorUsedError;
   MusicShelfRenderer? get musicShelfRenderer =>
       throw _privateConstructorUsedError;
   MusicCardShelfRenderer? get musicCardShelfRenderer =>
@@ -1061,6 +1064,8 @@ mixin _$SectionListContent {
       get musicEditablePlaylistDetailHeaderRenderer =>
           throw _privateConstructorUsedError;
   GridRenderer? get gridRenderer => throw _privateConstructorUsedError;
+  ItemSectionRenderer? get itemSectionRenderer =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this SectionListContent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1080,6 +1085,8 @@ abstract class $SectionListContentCopyWith<$Res> {
   @useResult
   $Res call(
       {MusicCarouselShelfRenderer? musicCarouselShelfRenderer,
+      @JsonKey(name: 'musicImmersiveCarouselShelfRenderer')
+      MusicCarouselShelfRenderer? musicImmersiveCarouselShelfRenderer,
       MusicShelfRenderer? musicShelfRenderer,
       MusicCardShelfRenderer? musicCardShelfRenderer,
       MusicPlaylistShelfRenderer? musicPlaylistShelfRenderer,
@@ -1087,9 +1094,12 @@ abstract class $SectionListContentCopyWith<$Res> {
       MusicResponsiveHeaderRenderer? musicResponsiveHeaderRenderer,
       MusicEditablePlaylistDetailHeaderRenderer?
           musicEditablePlaylistDetailHeaderRenderer,
-      GridRenderer? gridRenderer});
+      GridRenderer? gridRenderer,
+      ItemSectionRenderer? itemSectionRenderer});
 
   $MusicCarouselShelfRendererCopyWith<$Res>? get musicCarouselShelfRenderer;
+  $MusicCarouselShelfRendererCopyWith<$Res>?
+      get musicImmersiveCarouselShelfRenderer;
   $MusicShelfRendererCopyWith<$Res>? get musicShelfRenderer;
   $MusicCardShelfRendererCopyWith<$Res>? get musicCardShelfRenderer;
   $MusicPlaylistShelfRendererCopyWith<$Res>? get musicPlaylistShelfRenderer;
@@ -1100,6 +1110,7 @@ abstract class $SectionListContentCopyWith<$Res> {
   $MusicEditablePlaylistDetailHeaderRendererCopyWith<$Res>?
       get musicEditablePlaylistDetailHeaderRenderer;
   $GridRendererCopyWith<$Res>? get gridRenderer;
+  $ItemSectionRendererCopyWith<$Res>? get itemSectionRenderer;
 }
 
 /// @nodoc
@@ -1118,6 +1129,7 @@ class _$SectionListContentCopyWithImpl<$Res, $Val extends SectionListContent>
   @override
   $Res call({
     Object? musicCarouselShelfRenderer = freezed,
+    Object? musicImmersiveCarouselShelfRenderer = freezed,
     Object? musicShelfRenderer = freezed,
     Object? musicCardShelfRenderer = freezed,
     Object? musicPlaylistShelfRenderer = freezed,
@@ -1125,11 +1137,17 @@ class _$SectionListContentCopyWithImpl<$Res, $Val extends SectionListContent>
     Object? musicResponsiveHeaderRenderer = freezed,
     Object? musicEditablePlaylistDetailHeaderRenderer = freezed,
     Object? gridRenderer = freezed,
+    Object? itemSectionRenderer = freezed,
   }) {
     return _then(_value.copyWith(
       musicCarouselShelfRenderer: freezed == musicCarouselShelfRenderer
           ? _value.musicCarouselShelfRenderer
           : musicCarouselShelfRenderer // ignore: cast_nullable_to_non_nullable
+              as MusicCarouselShelfRenderer?,
+      musicImmersiveCarouselShelfRenderer: freezed ==
+              musicImmersiveCarouselShelfRenderer
+          ? _value.musicImmersiveCarouselShelfRenderer
+          : musicImmersiveCarouselShelfRenderer // ignore: cast_nullable_to_non_nullable
               as MusicCarouselShelfRenderer?,
       musicShelfRenderer: freezed == musicShelfRenderer
           ? _value.musicShelfRenderer
@@ -1160,6 +1178,10 @@ class _$SectionListContentCopyWithImpl<$Res, $Val extends SectionListContent>
           ? _value.gridRenderer
           : gridRenderer // ignore: cast_nullable_to_non_nullable
               as GridRenderer?,
+      itemSectionRenderer: freezed == itemSectionRenderer
+          ? _value.itemSectionRenderer
+          : itemSectionRenderer // ignore: cast_nullable_to_non_nullable
+              as ItemSectionRenderer?,
     ) as $Val);
   }
 
@@ -1175,6 +1197,23 @@ class _$SectionListContentCopyWithImpl<$Res, $Val extends SectionListContent>
     return $MusicCarouselShelfRendererCopyWith<$Res>(
         _value.musicCarouselShelfRenderer!, (value) {
       return _then(_value.copyWith(musicCarouselShelfRenderer: value) as $Val);
+    });
+  }
+
+  /// Create a copy of SectionListContent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MusicCarouselShelfRendererCopyWith<$Res>?
+      get musicImmersiveCarouselShelfRenderer {
+    if (_value.musicImmersiveCarouselShelfRenderer == null) {
+      return null;
+    }
+
+    return $MusicCarouselShelfRendererCopyWith<$Res>(
+        _value.musicImmersiveCarouselShelfRenderer!, (value) {
+      return _then(
+          _value.copyWith(musicImmersiveCarouselShelfRenderer: value) as $Val);
     });
   }
 
@@ -1287,6 +1326,21 @@ class _$SectionListContentCopyWithImpl<$Res, $Val extends SectionListContent>
       return _then(_value.copyWith(gridRenderer: value) as $Val);
     });
   }
+
+  /// Create a copy of SectionListContent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ItemSectionRendererCopyWith<$Res>? get itemSectionRenderer {
+    if (_value.itemSectionRenderer == null) {
+      return null;
+    }
+
+    return $ItemSectionRendererCopyWith<$Res>(_value.itemSectionRenderer!,
+        (value) {
+      return _then(_value.copyWith(itemSectionRenderer: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1299,6 +1353,8 @@ abstract class _$$SectionListContentImplCopyWith<$Res>
   @useResult
   $Res call(
       {MusicCarouselShelfRenderer? musicCarouselShelfRenderer,
+      @JsonKey(name: 'musicImmersiveCarouselShelfRenderer')
+      MusicCarouselShelfRenderer? musicImmersiveCarouselShelfRenderer,
       MusicShelfRenderer? musicShelfRenderer,
       MusicCardShelfRenderer? musicCardShelfRenderer,
       MusicPlaylistShelfRenderer? musicPlaylistShelfRenderer,
@@ -1306,10 +1362,14 @@ abstract class _$$SectionListContentImplCopyWith<$Res>
       MusicResponsiveHeaderRenderer? musicResponsiveHeaderRenderer,
       MusicEditablePlaylistDetailHeaderRenderer?
           musicEditablePlaylistDetailHeaderRenderer,
-      GridRenderer? gridRenderer});
+      GridRenderer? gridRenderer,
+      ItemSectionRenderer? itemSectionRenderer});
 
   @override
   $MusicCarouselShelfRendererCopyWith<$Res>? get musicCarouselShelfRenderer;
+  @override
+  $MusicCarouselShelfRendererCopyWith<$Res>?
+      get musicImmersiveCarouselShelfRenderer;
   @override
   $MusicShelfRendererCopyWith<$Res>? get musicShelfRenderer;
   @override
@@ -1327,6 +1387,8 @@ abstract class _$$SectionListContentImplCopyWith<$Res>
       get musicEditablePlaylistDetailHeaderRenderer;
   @override
   $GridRendererCopyWith<$Res>? get gridRenderer;
+  @override
+  $ItemSectionRendererCopyWith<$Res>? get itemSectionRenderer;
 }
 
 /// @nodoc
@@ -1343,6 +1405,7 @@ class __$$SectionListContentImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? musicCarouselShelfRenderer = freezed,
+    Object? musicImmersiveCarouselShelfRenderer = freezed,
     Object? musicShelfRenderer = freezed,
     Object? musicCardShelfRenderer = freezed,
     Object? musicPlaylistShelfRenderer = freezed,
@@ -1350,11 +1413,17 @@ class __$$SectionListContentImplCopyWithImpl<$Res>
     Object? musicResponsiveHeaderRenderer = freezed,
     Object? musicEditablePlaylistDetailHeaderRenderer = freezed,
     Object? gridRenderer = freezed,
+    Object? itemSectionRenderer = freezed,
   }) {
     return _then(_$SectionListContentImpl(
       musicCarouselShelfRenderer: freezed == musicCarouselShelfRenderer
           ? _value.musicCarouselShelfRenderer
           : musicCarouselShelfRenderer // ignore: cast_nullable_to_non_nullable
+              as MusicCarouselShelfRenderer?,
+      musicImmersiveCarouselShelfRenderer: freezed ==
+              musicImmersiveCarouselShelfRenderer
+          ? _value.musicImmersiveCarouselShelfRenderer
+          : musicImmersiveCarouselShelfRenderer // ignore: cast_nullable_to_non_nullable
               as MusicCarouselShelfRenderer?,
       musicShelfRenderer: freezed == musicShelfRenderer
           ? _value.musicShelfRenderer
@@ -1385,28 +1454,40 @@ class __$$SectionListContentImplCopyWithImpl<$Res>
           ? _value.gridRenderer
           : gridRenderer // ignore: cast_nullable_to_non_nullable
               as GridRenderer?,
+      itemSectionRenderer: freezed == itemSectionRenderer
+          ? _value.itemSectionRenderer
+          : itemSectionRenderer // ignore: cast_nullable_to_non_nullable
+              as ItemSectionRenderer?,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$SectionListContentImpl implements _SectionListContent {
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class _$SectionListContentImpl extends _SectionListContent {
   const _$SectionListContentImpl(
       {this.musicCarouselShelfRenderer,
+      @JsonKey(name: 'musicImmersiveCarouselShelfRenderer')
+      this.musicImmersiveCarouselShelfRenderer,
       this.musicShelfRenderer,
       this.musicCardShelfRenderer,
       this.musicPlaylistShelfRenderer,
       this.musicDescriptionShelfRenderer,
       this.musicResponsiveHeaderRenderer,
       this.musicEditablePlaylistDetailHeaderRenderer,
-      this.gridRenderer});
+      this.gridRenderer,
+      this.itemSectionRenderer})
+      : super._();
 
   factory _$SectionListContentImpl.fromJson(Map<String, dynamic> json) =>
       _$$SectionListContentImplFromJson(json);
 
   @override
   final MusicCarouselShelfRenderer? musicCarouselShelfRenderer;
+  @override
+  @JsonKey(name: 'musicImmersiveCarouselShelfRenderer')
+  final MusicCarouselShelfRenderer? musicImmersiveCarouselShelfRenderer;
   @override
   final MusicShelfRenderer? musicShelfRenderer;
   @override
@@ -1422,10 +1503,12 @@ class _$SectionListContentImpl implements _SectionListContent {
       musicEditablePlaylistDetailHeaderRenderer;
   @override
   final GridRenderer? gridRenderer;
+  @override
+  final ItemSectionRenderer? itemSectionRenderer;
 
   @override
   String toString() {
-    return 'SectionListContent(musicCarouselShelfRenderer: $musicCarouselShelfRenderer, musicShelfRenderer: $musicShelfRenderer, musicCardShelfRenderer: $musicCardShelfRenderer, musicPlaylistShelfRenderer: $musicPlaylistShelfRenderer, musicDescriptionShelfRenderer: $musicDescriptionShelfRenderer, musicResponsiveHeaderRenderer: $musicResponsiveHeaderRenderer, musicEditablePlaylistDetailHeaderRenderer: $musicEditablePlaylistDetailHeaderRenderer, gridRenderer: $gridRenderer)';
+    return 'SectionListContent(musicCarouselShelfRenderer: $musicCarouselShelfRenderer, musicImmersiveCarouselShelfRenderer: $musicImmersiveCarouselShelfRenderer, musicShelfRenderer: $musicShelfRenderer, musicCardShelfRenderer: $musicCardShelfRenderer, musicPlaylistShelfRenderer: $musicPlaylistShelfRenderer, musicDescriptionShelfRenderer: $musicDescriptionShelfRenderer, musicResponsiveHeaderRenderer: $musicResponsiveHeaderRenderer, musicEditablePlaylistDetailHeaderRenderer: $musicEditablePlaylistDetailHeaderRenderer, gridRenderer: $gridRenderer, itemSectionRenderer: $itemSectionRenderer)';
   }
 
   @override
@@ -1433,16 +1516,18 @@ class _$SectionListContentImpl implements _SectionListContent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SectionListContentImpl &&
-            (identical(other.musicCarouselShelfRenderer,
-                    musicCarouselShelfRenderer) ||
+            (identical(other.musicCarouselShelfRenderer, musicCarouselShelfRenderer) ||
                 other.musicCarouselShelfRenderer ==
                     musicCarouselShelfRenderer) &&
+            (identical(other.musicImmersiveCarouselShelfRenderer,
+                    musicImmersiveCarouselShelfRenderer) ||
+                other.musicImmersiveCarouselShelfRenderer ==
+                    musicImmersiveCarouselShelfRenderer) &&
             (identical(other.musicShelfRenderer, musicShelfRenderer) ||
                 other.musicShelfRenderer == musicShelfRenderer) &&
             (identical(other.musicCardShelfRenderer, musicCardShelfRenderer) ||
                 other.musicCardShelfRenderer == musicCardShelfRenderer) &&
-            (identical(other.musicPlaylistShelfRenderer,
-                    musicPlaylistShelfRenderer) ||
+            (identical(other.musicPlaylistShelfRenderer, musicPlaylistShelfRenderer) ||
                 other.musicPlaylistShelfRenderer ==
                     musicPlaylistShelfRenderer) &&
             (identical(other.musicDescriptionShelfRenderer,
@@ -1458,7 +1543,9 @@ class _$SectionListContentImpl implements _SectionListContent {
                 other.musicEditablePlaylistDetailHeaderRenderer ==
                     musicEditablePlaylistDetailHeaderRenderer) &&
             (identical(other.gridRenderer, gridRenderer) ||
-                other.gridRenderer == gridRenderer));
+                other.gridRenderer == gridRenderer) &&
+            (identical(other.itemSectionRenderer, itemSectionRenderer) ||
+                other.itemSectionRenderer == itemSectionRenderer));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1466,13 +1553,15 @@ class _$SectionListContentImpl implements _SectionListContent {
   int get hashCode => Object.hash(
       runtimeType,
       musicCarouselShelfRenderer,
+      musicImmersiveCarouselShelfRenderer,
       musicShelfRenderer,
       musicCardShelfRenderer,
       musicPlaylistShelfRenderer,
       musicDescriptionShelfRenderer,
       musicResponsiveHeaderRenderer,
       musicEditablePlaylistDetailHeaderRenderer,
-      gridRenderer);
+      gridRenderer,
+      itemSectionRenderer);
 
   /// Create a copy of SectionListContent
   /// with the given fields replaced by the non-null parameter values.
@@ -1491,23 +1580,31 @@ class _$SectionListContentImpl implements _SectionListContent {
   }
 }
 
-abstract class _SectionListContent implements SectionListContent {
+abstract class _SectionListContent extends SectionListContent {
   const factory _SectionListContent(
-      {final MusicCarouselShelfRenderer? musicCarouselShelfRenderer,
-      final MusicShelfRenderer? musicShelfRenderer,
-      final MusicCardShelfRenderer? musicCardShelfRenderer,
-      final MusicPlaylistShelfRenderer? musicPlaylistShelfRenderer,
-      final MusicDescriptionShelfRenderer? musicDescriptionShelfRenderer,
-      final MusicResponsiveHeaderRenderer? musicResponsiveHeaderRenderer,
-      final MusicEditablePlaylistDetailHeaderRenderer?
-          musicEditablePlaylistDetailHeaderRenderer,
-      final GridRenderer? gridRenderer}) = _$SectionListContentImpl;
+          {final MusicCarouselShelfRenderer? musicCarouselShelfRenderer,
+          @JsonKey(name: 'musicImmersiveCarouselShelfRenderer')
+          final MusicCarouselShelfRenderer? musicImmersiveCarouselShelfRenderer,
+          final MusicShelfRenderer? musicShelfRenderer,
+          final MusicCardShelfRenderer? musicCardShelfRenderer,
+          final MusicPlaylistShelfRenderer? musicPlaylistShelfRenderer,
+          final MusicDescriptionShelfRenderer? musicDescriptionShelfRenderer,
+          final MusicResponsiveHeaderRenderer? musicResponsiveHeaderRenderer,
+          final MusicEditablePlaylistDetailHeaderRenderer?
+              musicEditablePlaylistDetailHeaderRenderer,
+          final GridRenderer? gridRenderer,
+          final ItemSectionRenderer? itemSectionRenderer}) =
+      _$SectionListContentImpl;
+  const _SectionListContent._() : super._();
 
   factory _SectionListContent.fromJson(Map<String, dynamic> json) =
       _$SectionListContentImpl.fromJson;
 
   @override
   MusicCarouselShelfRenderer? get musicCarouselShelfRenderer;
+  @override
+  @JsonKey(name: 'musicImmersiveCarouselShelfRenderer')
+  MusicCarouselShelfRenderer? get musicImmersiveCarouselShelfRenderer;
   @override
   MusicShelfRenderer? get musicShelfRenderer;
   @override
@@ -1523,11 +1620,384 @@ abstract class _SectionListContent implements SectionListContent {
       get musicEditablePlaylistDetailHeaderRenderer;
   @override
   GridRenderer? get gridRenderer;
+  @override
+  ItemSectionRenderer? get itemSectionRenderer;
 
   /// Create a copy of SectionListContent
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SectionListContentImplCopyWith<_$SectionListContentImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ItemSectionRenderer _$ItemSectionRendererFromJson(Map<String, dynamic> json) {
+  return _ItemSectionRenderer.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ItemSectionRenderer {
+  List<ItemSectionContent>? get contents => throw _privateConstructorUsedError;
+
+  /// Serializes this ItemSectionRenderer to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of ItemSectionRenderer
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ItemSectionRendererCopyWith<ItemSectionRenderer> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ItemSectionRendererCopyWith<$Res> {
+  factory $ItemSectionRendererCopyWith(
+          ItemSectionRenderer value, $Res Function(ItemSectionRenderer) then) =
+      _$ItemSectionRendererCopyWithImpl<$Res, ItemSectionRenderer>;
+  @useResult
+  $Res call({List<ItemSectionContent>? contents});
+}
+
+/// @nodoc
+class _$ItemSectionRendererCopyWithImpl<$Res, $Val extends ItemSectionRenderer>
+    implements $ItemSectionRendererCopyWith<$Res> {
+  _$ItemSectionRendererCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ItemSectionRenderer
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? contents = freezed,
+  }) {
+    return _then(_value.copyWith(
+      contents: freezed == contents
+          ? _value.contents
+          : contents // ignore: cast_nullable_to_non_nullable
+              as List<ItemSectionContent>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ItemSectionRendererImplCopyWith<$Res>
+    implements $ItemSectionRendererCopyWith<$Res> {
+  factory _$$ItemSectionRendererImplCopyWith(_$ItemSectionRendererImpl value,
+          $Res Function(_$ItemSectionRendererImpl) then) =
+      __$$ItemSectionRendererImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<ItemSectionContent>? contents});
+}
+
+/// @nodoc
+class __$$ItemSectionRendererImplCopyWithImpl<$Res>
+    extends _$ItemSectionRendererCopyWithImpl<$Res, _$ItemSectionRendererImpl>
+    implements _$$ItemSectionRendererImplCopyWith<$Res> {
+  __$$ItemSectionRendererImplCopyWithImpl(_$ItemSectionRendererImpl _value,
+      $Res Function(_$ItemSectionRendererImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ItemSectionRenderer
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? contents = freezed,
+  }) {
+    return _then(_$ItemSectionRendererImpl(
+      contents: freezed == contents
+          ? _value._contents
+          : contents // ignore: cast_nullable_to_non_nullable
+              as List<ItemSectionContent>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ItemSectionRendererImpl implements _ItemSectionRenderer {
+  const _$ItemSectionRendererImpl({final List<ItemSectionContent>? contents})
+      : _contents = contents;
+
+  factory _$ItemSectionRendererImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ItemSectionRendererImplFromJson(json);
+
+  final List<ItemSectionContent>? _contents;
+  @override
+  List<ItemSectionContent>? get contents {
+    final value = _contents;
+    if (value == null) return null;
+    if (_contents is EqualUnmodifiableListView) return _contents;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'ItemSectionRenderer(contents: $contents)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ItemSectionRendererImpl &&
+            const DeepCollectionEquality().equals(other._contents, _contents));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_contents));
+
+  /// Create a copy of ItemSectionRenderer
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ItemSectionRendererImplCopyWith<_$ItemSectionRendererImpl> get copyWith =>
+      __$$ItemSectionRendererImplCopyWithImpl<_$ItemSectionRendererImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ItemSectionRendererImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ItemSectionRenderer implements ItemSectionRenderer {
+  const factory _ItemSectionRenderer(
+      {final List<ItemSectionContent>? contents}) = _$ItemSectionRendererImpl;
+
+  factory _ItemSectionRenderer.fromJson(Map<String, dynamic> json) =
+      _$ItemSectionRendererImpl.fromJson;
+
+  @override
+  List<ItemSectionContent>? get contents;
+
+  /// Create a copy of ItemSectionRenderer
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ItemSectionRendererImplCopyWith<_$ItemSectionRendererImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ItemSectionContent _$ItemSectionContentFromJson(Map<String, dynamic> json) {
+  return _ItemSectionContent.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ItemSectionContent {
+  GridRenderer? get gridRenderer => throw _privateConstructorUsedError;
+  MusicShelfRenderer? get musicShelfRenderer =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this ItemSectionContent to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of ItemSectionContent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ItemSectionContentCopyWith<ItemSectionContent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ItemSectionContentCopyWith<$Res> {
+  factory $ItemSectionContentCopyWith(
+          ItemSectionContent value, $Res Function(ItemSectionContent) then) =
+      _$ItemSectionContentCopyWithImpl<$Res, ItemSectionContent>;
+  @useResult
+  $Res call(
+      {GridRenderer? gridRenderer, MusicShelfRenderer? musicShelfRenderer});
+
+  $GridRendererCopyWith<$Res>? get gridRenderer;
+  $MusicShelfRendererCopyWith<$Res>? get musicShelfRenderer;
+}
+
+/// @nodoc
+class _$ItemSectionContentCopyWithImpl<$Res, $Val extends ItemSectionContent>
+    implements $ItemSectionContentCopyWith<$Res> {
+  _$ItemSectionContentCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ItemSectionContent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? gridRenderer = freezed,
+    Object? musicShelfRenderer = freezed,
+  }) {
+    return _then(_value.copyWith(
+      gridRenderer: freezed == gridRenderer
+          ? _value.gridRenderer
+          : gridRenderer // ignore: cast_nullable_to_non_nullable
+              as GridRenderer?,
+      musicShelfRenderer: freezed == musicShelfRenderer
+          ? _value.musicShelfRenderer
+          : musicShelfRenderer // ignore: cast_nullable_to_non_nullable
+              as MusicShelfRenderer?,
+    ) as $Val);
+  }
+
+  /// Create a copy of ItemSectionContent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $GridRendererCopyWith<$Res>? get gridRenderer {
+    if (_value.gridRenderer == null) {
+      return null;
+    }
+
+    return $GridRendererCopyWith<$Res>(_value.gridRenderer!, (value) {
+      return _then(_value.copyWith(gridRenderer: value) as $Val);
+    });
+  }
+
+  /// Create a copy of ItemSectionContent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MusicShelfRendererCopyWith<$Res>? get musicShelfRenderer {
+    if (_value.musicShelfRenderer == null) {
+      return null;
+    }
+
+    return $MusicShelfRendererCopyWith<$Res>(_value.musicShelfRenderer!,
+        (value) {
+      return _then(_value.copyWith(musicShelfRenderer: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ItemSectionContentImplCopyWith<$Res>
+    implements $ItemSectionContentCopyWith<$Res> {
+  factory _$$ItemSectionContentImplCopyWith(_$ItemSectionContentImpl value,
+          $Res Function(_$ItemSectionContentImpl) then) =
+      __$$ItemSectionContentImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {GridRenderer? gridRenderer, MusicShelfRenderer? musicShelfRenderer});
+
+  @override
+  $GridRendererCopyWith<$Res>? get gridRenderer;
+  @override
+  $MusicShelfRendererCopyWith<$Res>? get musicShelfRenderer;
+}
+
+/// @nodoc
+class __$$ItemSectionContentImplCopyWithImpl<$Res>
+    extends _$ItemSectionContentCopyWithImpl<$Res, _$ItemSectionContentImpl>
+    implements _$$ItemSectionContentImplCopyWith<$Res> {
+  __$$ItemSectionContentImplCopyWithImpl(_$ItemSectionContentImpl _value,
+      $Res Function(_$ItemSectionContentImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ItemSectionContent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? gridRenderer = freezed,
+    Object? musicShelfRenderer = freezed,
+  }) {
+    return _then(_$ItemSectionContentImpl(
+      gridRenderer: freezed == gridRenderer
+          ? _value.gridRenderer
+          : gridRenderer // ignore: cast_nullable_to_non_nullable
+              as GridRenderer?,
+      musicShelfRenderer: freezed == musicShelfRenderer
+          ? _value.musicShelfRenderer
+          : musicShelfRenderer // ignore: cast_nullable_to_non_nullable
+              as MusicShelfRenderer?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ItemSectionContentImpl implements _ItemSectionContent {
+  const _$ItemSectionContentImpl({this.gridRenderer, this.musicShelfRenderer});
+
+  factory _$ItemSectionContentImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ItemSectionContentImplFromJson(json);
+
+  @override
+  final GridRenderer? gridRenderer;
+  @override
+  final MusicShelfRenderer? musicShelfRenderer;
+
+  @override
+  String toString() {
+    return 'ItemSectionContent(gridRenderer: $gridRenderer, musicShelfRenderer: $musicShelfRenderer)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ItemSectionContentImpl &&
+            (identical(other.gridRenderer, gridRenderer) ||
+                other.gridRenderer == gridRenderer) &&
+            (identical(other.musicShelfRenderer, musicShelfRenderer) ||
+                other.musicShelfRenderer == musicShelfRenderer));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, gridRenderer, musicShelfRenderer);
+
+  /// Create a copy of ItemSectionContent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ItemSectionContentImplCopyWith<_$ItemSectionContentImpl> get copyWith =>
+      __$$ItemSectionContentImplCopyWithImpl<_$ItemSectionContentImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ItemSectionContentImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ItemSectionContent implements ItemSectionContent {
+  const factory _ItemSectionContent(
+      {final GridRenderer? gridRenderer,
+      final MusicShelfRenderer? musicShelfRenderer}) = _$ItemSectionContentImpl;
+
+  factory _ItemSectionContent.fromJson(Map<String, dynamic> json) =
+      _$ItemSectionContentImpl.fromJson;
+
+  @override
+  GridRenderer? get gridRenderer;
+  @override
+  MusicShelfRenderer? get musicShelfRenderer;
+
+  /// Create a copy of ItemSectionContent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ItemSectionContentImplCopyWith<_$ItemSectionContentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

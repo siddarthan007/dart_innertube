@@ -29,6 +29,7 @@ mixin _$NavigationEndpoint {
   ShareEntityEndpoint? get shareEntityEndpoint =>
       throw _privateConstructorUsedError;
   FeedbackEndpoint? get feedbackEndpoint => throw _privateConstructorUsedError;
+  UrlEndpoint? get urlEndpoint => throw _privateConstructorUsedError;
 
   /// Serializes this NavigationEndpoint to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,7 +54,8 @@ abstract class $NavigationEndpointCopyWith<$Res> {
       SearchEndpoint? searchEndpoint,
       QueueAddEndpoint? queueAddEndpoint,
       ShareEntityEndpoint? shareEntityEndpoint,
-      FeedbackEndpoint? feedbackEndpoint});
+      FeedbackEndpoint? feedbackEndpoint,
+      UrlEndpoint? urlEndpoint});
 
   $WatchEndpointCopyWith<$Res>? get watchEndpoint;
   $WatchEndpointCopyWith<$Res>? get watchPlaylistEndpoint;
@@ -62,6 +64,7 @@ abstract class $NavigationEndpointCopyWith<$Res> {
   $QueueAddEndpointCopyWith<$Res>? get queueAddEndpoint;
   $ShareEntityEndpointCopyWith<$Res>? get shareEntityEndpoint;
   $FeedbackEndpointCopyWith<$Res>? get feedbackEndpoint;
+  $UrlEndpointCopyWith<$Res>? get urlEndpoint;
 }
 
 /// @nodoc
@@ -86,6 +89,7 @@ class _$NavigationEndpointCopyWithImpl<$Res, $Val extends NavigationEndpoint>
     Object? queueAddEndpoint = freezed,
     Object? shareEntityEndpoint = freezed,
     Object? feedbackEndpoint = freezed,
+    Object? urlEndpoint = freezed,
   }) {
     return _then(_value.copyWith(
       watchEndpoint: freezed == watchEndpoint
@@ -116,6 +120,10 @@ class _$NavigationEndpointCopyWithImpl<$Res, $Val extends NavigationEndpoint>
           ? _value.feedbackEndpoint
           : feedbackEndpoint // ignore: cast_nullable_to_non_nullable
               as FeedbackEndpoint?,
+      urlEndpoint: freezed == urlEndpoint
+          ? _value.urlEndpoint
+          : urlEndpoint // ignore: cast_nullable_to_non_nullable
+              as UrlEndpoint?,
     ) as $Val);
   }
 
@@ -217,6 +225,20 @@ class _$NavigationEndpointCopyWithImpl<$Res, $Val extends NavigationEndpoint>
       return _then(_value.copyWith(feedbackEndpoint: value) as $Val);
     });
   }
+
+  /// Create a copy of NavigationEndpoint
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UrlEndpointCopyWith<$Res>? get urlEndpoint {
+    if (_value.urlEndpoint == null) {
+      return null;
+    }
+
+    return $UrlEndpointCopyWith<$Res>(_value.urlEndpoint!, (value) {
+      return _then(_value.copyWith(urlEndpoint: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -234,7 +256,8 @@ abstract class _$$NavigationEndpointImplCopyWith<$Res>
       SearchEndpoint? searchEndpoint,
       QueueAddEndpoint? queueAddEndpoint,
       ShareEntityEndpoint? shareEntityEndpoint,
-      FeedbackEndpoint? feedbackEndpoint});
+      FeedbackEndpoint? feedbackEndpoint,
+      UrlEndpoint? urlEndpoint});
 
   @override
   $WatchEndpointCopyWith<$Res>? get watchEndpoint;
@@ -250,6 +273,8 @@ abstract class _$$NavigationEndpointImplCopyWith<$Res>
   $ShareEntityEndpointCopyWith<$Res>? get shareEntityEndpoint;
   @override
   $FeedbackEndpointCopyWith<$Res>? get feedbackEndpoint;
+  @override
+  $UrlEndpointCopyWith<$Res>? get urlEndpoint;
 }
 
 /// @nodoc
@@ -272,6 +297,7 @@ class __$$NavigationEndpointImplCopyWithImpl<$Res>
     Object? queueAddEndpoint = freezed,
     Object? shareEntityEndpoint = freezed,
     Object? feedbackEndpoint = freezed,
+    Object? urlEndpoint = freezed,
   }) {
     return _then(_$NavigationEndpointImpl(
       watchEndpoint: freezed == watchEndpoint
@@ -302,6 +328,10 @@ class __$$NavigationEndpointImplCopyWithImpl<$Res>
           ? _value.feedbackEndpoint
           : feedbackEndpoint // ignore: cast_nullable_to_non_nullable
               as FeedbackEndpoint?,
+      urlEndpoint: freezed == urlEndpoint
+          ? _value.urlEndpoint
+          : urlEndpoint // ignore: cast_nullable_to_non_nullable
+              as UrlEndpoint?,
     ));
   }
 }
@@ -316,7 +346,8 @@ class _$NavigationEndpointImpl extends _NavigationEndpoint {
       this.searchEndpoint,
       this.queueAddEndpoint,
       this.shareEntityEndpoint,
-      this.feedbackEndpoint})
+      this.feedbackEndpoint,
+      this.urlEndpoint})
       : super._();
 
   factory _$NavigationEndpointImpl.fromJson(Map<String, dynamic> json) =>
@@ -336,10 +367,12 @@ class _$NavigationEndpointImpl extends _NavigationEndpoint {
   final ShareEntityEndpoint? shareEntityEndpoint;
   @override
   final FeedbackEndpoint? feedbackEndpoint;
+  @override
+  final UrlEndpoint? urlEndpoint;
 
   @override
   String toString() {
-    return 'NavigationEndpoint(watchEndpoint: $watchEndpoint, watchPlaylistEndpoint: $watchPlaylistEndpoint, browseEndpoint: $browseEndpoint, searchEndpoint: $searchEndpoint, queueAddEndpoint: $queueAddEndpoint, shareEntityEndpoint: $shareEntityEndpoint, feedbackEndpoint: $feedbackEndpoint)';
+    return 'NavigationEndpoint(watchEndpoint: $watchEndpoint, watchPlaylistEndpoint: $watchPlaylistEndpoint, browseEndpoint: $browseEndpoint, searchEndpoint: $searchEndpoint, queueAddEndpoint: $queueAddEndpoint, shareEntityEndpoint: $shareEntityEndpoint, feedbackEndpoint: $feedbackEndpoint, urlEndpoint: $urlEndpoint)';
   }
 
   @override
@@ -360,7 +393,9 @@ class _$NavigationEndpointImpl extends _NavigationEndpoint {
             (identical(other.shareEntityEndpoint, shareEntityEndpoint) ||
                 other.shareEntityEndpoint == shareEntityEndpoint) &&
             (identical(other.feedbackEndpoint, feedbackEndpoint) ||
-                other.feedbackEndpoint == feedbackEndpoint));
+                other.feedbackEndpoint == feedbackEndpoint) &&
+            (identical(other.urlEndpoint, urlEndpoint) ||
+                other.urlEndpoint == urlEndpoint));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -373,7 +408,8 @@ class _$NavigationEndpointImpl extends _NavigationEndpoint {
       searchEndpoint,
       queueAddEndpoint,
       shareEntityEndpoint,
-      feedbackEndpoint);
+      feedbackEndpoint,
+      urlEndpoint);
 
   /// Create a copy of NavigationEndpoint
   /// with the given fields replaced by the non-null parameter values.
@@ -400,7 +436,8 @@ abstract class _NavigationEndpoint extends NavigationEndpoint {
       final SearchEndpoint? searchEndpoint,
       final QueueAddEndpoint? queueAddEndpoint,
       final ShareEntityEndpoint? shareEntityEndpoint,
-      final FeedbackEndpoint? feedbackEndpoint}) = _$NavigationEndpointImpl;
+      final FeedbackEndpoint? feedbackEndpoint,
+      final UrlEndpoint? urlEndpoint}) = _$NavigationEndpointImpl;
   const _NavigationEndpoint._() : super._();
 
   factory _NavigationEndpoint.fromJson(Map<String, dynamic> json) =
@@ -420,6 +457,8 @@ abstract class _NavigationEndpoint extends NavigationEndpoint {
   ShareEntityEndpoint? get shareEntityEndpoint;
   @override
   FeedbackEndpoint? get feedbackEndpoint;
+  @override
+  UrlEndpoint? get urlEndpoint;
 
   /// Create a copy of NavigationEndpoint
   /// with the given fields replaced by the non-null parameter values.

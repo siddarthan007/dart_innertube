@@ -46,8 +46,13 @@ class HistoryPageHelper {
     final videoId = renderer.playlistItemData?.videoId;
     if (videoId == null) return null;
 
-    final title = renderer.flexColumns.firstOrNull
-        ?.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.firstOrNull
+    final title = renderer
+        .flexColumns
+        .firstOrNull
+        ?.musicResponsiveListItemFlexColumnRenderer
+        ?.text
+        ?.runs
+        ?.firstOrNull
         ?.text;
     if (title == null) return null;
 
@@ -80,8 +85,13 @@ class HistoryPageHelper {
           )
         : null;
 
-    final durationText = renderer.fixedColumns?.firstOrNull
-        ?.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.firstOrNull
+    final durationText = renderer
+        .fixedColumns
+        ?.firstOrNull
+        ?.musicResponsiveListItemFlexColumnRenderer
+        ?.text
+        ?.runs
+        ?.firstOrNull
         ?.text;
 
     final thumbnail =
@@ -92,7 +102,8 @@ class HistoryPageHelper {
     final menuItems = renderer.menu?.menuRenderer.items;
     final historyRemoveToken = menuItems
         ?.where((item) =>
-            item.menuServiceItemRenderer?.icon.iconType == 'REMOVE_FROM_HISTORY')
+            item.menuServiceItemRenderer?.icon.iconType ==
+            'REMOVE_FROM_HISTORY')
         .firstOrNull
         ?.menuServiceItemRenderer
         ?.serviceEndpoint

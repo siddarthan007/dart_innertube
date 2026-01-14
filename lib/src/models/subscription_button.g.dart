@@ -9,17 +9,36 @@ part of 'subscription_button.dart';
 _$SubscriptionButtonImpl _$$SubscriptionButtonImplFromJson(
         Map<String, dynamic> json) =>
     _$SubscriptionButtonImpl(
-      subscribed: json['subscribed'] as bool,
-      enabled: json['enabled'] as bool,
-      itemType: json['itemType'] as String,
-      channelId: json['channelId'] as String,
+      subscribeButtonRenderer: SubscribeButtonRenderer.fromJson(
+          json['subscribeButtonRenderer'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$SubscriptionButtonImplToJson(
         _$SubscriptionButtonImpl instance) =>
     <String, dynamic>{
+      'subscribeButtonRenderer': instance.subscribeButtonRenderer,
+    };
+
+_$SubscribeButtonRendererImpl _$$SubscribeButtonRendererImplFromJson(
+        Map<String, dynamic> json) =>
+    _$SubscribeButtonRendererImpl(
+      subscribed: json['subscribed'] as bool,
+      channelId: json['channelId'] as String,
+      longSubscriberCountText: json['longSubscriberCountText'] == null
+          ? null
+          : Runs.fromJson(
+              json['longSubscriberCountText'] as Map<String, dynamic>),
+      shortSubscriberCountText: json['shortSubscriberCountText'] == null
+          ? null
+          : Runs.fromJson(
+              json['shortSubscriberCountText'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$SubscribeButtonRendererImplToJson(
+        _$SubscribeButtonRendererImpl instance) =>
+    <String, dynamic>{
       'subscribed': instance.subscribed,
-      'enabled': instance.enabled,
-      'itemType': instance.itemType,
       'channelId': instance.channelId,
+      'longSubscriberCountText': instance.longSubscriberCountText,
+      'shortSubscriberCountText': instance.shortSubscriberCountText,
     };

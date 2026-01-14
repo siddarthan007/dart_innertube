@@ -96,53 +96,102 @@ Map<String, dynamic> _$$ChipCloudChipRendererImplToJson(
 _$SectionListContentImpl _$$SectionListContentImplFromJson(
         Map<String, dynamic> json) =>
     _$SectionListContentImpl(
-      musicCarouselShelfRenderer: json['musicCarouselShelfRenderer'] == null
+      musicCarouselShelfRenderer: json['music_carousel_shelf_renderer'] == null
           ? null
           : MusicCarouselShelfRenderer.fromJson(
-              json['musicCarouselShelfRenderer'] as Map<String, dynamic>),
-      musicShelfRenderer: json['musicShelfRenderer'] == null
+              json['music_carousel_shelf_renderer'] as Map<String, dynamic>),
+      musicImmersiveCarouselShelfRenderer:
+          json['musicImmersiveCarouselShelfRenderer'] == null
+              ? null
+              : MusicCarouselShelfRenderer.fromJson(
+                  json['musicImmersiveCarouselShelfRenderer']
+                      as Map<String, dynamic>),
+      musicShelfRenderer: json['music_shelf_renderer'] == null
           ? null
           : MusicShelfRenderer.fromJson(
-              json['musicShelfRenderer'] as Map<String, dynamic>),
-      musicCardShelfRenderer: json['musicCardShelfRenderer'] == null
+              json['music_shelf_renderer'] as Map<String, dynamic>),
+      musicCardShelfRenderer: json['music_card_shelf_renderer'] == null
           ? null
           : MusicCardShelfRenderer.fromJson(
-              json['musicCardShelfRenderer'] as Map<String, dynamic>),
-      musicPlaylistShelfRenderer: json['musicPlaylistShelfRenderer'] == null
+              json['music_card_shelf_renderer'] as Map<String, dynamic>),
+      musicPlaylistShelfRenderer: json['music_playlist_shelf_renderer'] == null
           ? null
           : MusicPlaylistShelfRenderer.fromJson(
-              json['musicPlaylistShelfRenderer'] as Map<String, dynamic>),
-      musicDescriptionShelfRenderer: json['musicDescriptionShelfRenderer'] ==
+              json['music_playlist_shelf_renderer'] as Map<String, dynamic>),
+      musicDescriptionShelfRenderer: json['music_description_shelf_renderer'] ==
               null
           ? null
           : MusicDescriptionShelfRenderer.fromJson(
-              json['musicDescriptionShelfRenderer'] as Map<String, dynamic>),
-      musicResponsiveHeaderRenderer: json['musicResponsiveHeaderRenderer'] ==
+              json['music_description_shelf_renderer'] as Map<String, dynamic>),
+      musicResponsiveHeaderRenderer: json['music_responsive_header_renderer'] ==
               null
           ? null
           : MusicResponsiveHeaderRenderer.fromJson(
-              json['musicResponsiveHeaderRenderer'] as Map<String, dynamic>),
+              json['music_responsive_header_renderer'] as Map<String, dynamic>),
       musicEditablePlaylistDetailHeaderRenderer:
-          json['musicEditablePlaylistDetailHeaderRenderer'] == null
+          json['music_editable_playlist_detail_header_renderer'] == null
               ? null
               : MusicEditablePlaylistDetailHeaderRenderer.fromJson(
-                  json['musicEditablePlaylistDetailHeaderRenderer']
+                  json['music_editable_playlist_detail_header_renderer']
                       as Map<String, dynamic>),
-      gridRenderer: json['gridRenderer'] == null
+      gridRenderer: json['grid_renderer'] == null
           ? null
-          : GridRenderer.fromJson(json['gridRenderer'] as Map<String, dynamic>),
+          : GridRenderer.fromJson(
+              json['grid_renderer'] as Map<String, dynamic>),
+      itemSectionRenderer: json['item_section_renderer'] == null
+          ? null
+          : ItemSectionRenderer.fromJson(
+              json['item_section_renderer'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$SectionListContentImplToJson(
         _$SectionListContentImpl instance) =>
     <String, dynamic>{
-      'musicCarouselShelfRenderer': instance.musicCarouselShelfRenderer,
-      'musicShelfRenderer': instance.musicShelfRenderer,
-      'musicCardShelfRenderer': instance.musicCardShelfRenderer,
-      'musicPlaylistShelfRenderer': instance.musicPlaylistShelfRenderer,
-      'musicDescriptionShelfRenderer': instance.musicDescriptionShelfRenderer,
-      'musicResponsiveHeaderRenderer': instance.musicResponsiveHeaderRenderer,
-      'musicEditablePlaylistDetailHeaderRenderer':
+      'music_carousel_shelf_renderer': instance.musicCarouselShelfRenderer,
+      'musicImmersiveCarouselShelfRenderer':
+          instance.musicImmersiveCarouselShelfRenderer,
+      'music_shelf_renderer': instance.musicShelfRenderer,
+      'music_card_shelf_renderer': instance.musicCardShelfRenderer,
+      'music_playlist_shelf_renderer': instance.musicPlaylistShelfRenderer,
+      'music_description_shelf_renderer':
+          instance.musicDescriptionShelfRenderer,
+      'music_responsive_header_renderer':
+          instance.musicResponsiveHeaderRenderer,
+      'music_editable_playlist_detail_header_renderer':
           instance.musicEditablePlaylistDetailHeaderRenderer,
+      'grid_renderer': instance.gridRenderer,
+      'item_section_renderer': instance.itemSectionRenderer,
+    };
+
+_$ItemSectionRendererImpl _$$ItemSectionRendererImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ItemSectionRendererImpl(
+      contents: (json['contents'] as List<dynamic>?)
+          ?.map((e) => ItemSectionContent.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$ItemSectionRendererImplToJson(
+        _$ItemSectionRendererImpl instance) =>
+    <String, dynamic>{
+      'contents': instance.contents,
+    };
+
+_$ItemSectionContentImpl _$$ItemSectionContentImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ItemSectionContentImpl(
+      gridRenderer: json['gridRenderer'] == null
+          ? null
+          : GridRenderer.fromJson(json['gridRenderer'] as Map<String, dynamic>),
+      musicShelfRenderer: json['musicShelfRenderer'] == null
+          ? null
+          : MusicShelfRenderer.fromJson(
+              json['musicShelfRenderer'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$ItemSectionContentImplToJson(
+        _$ItemSectionContentImpl instance) =>
+    <String, dynamic>{
       'gridRenderer': instance.gridRenderer,
+      'musicShelfRenderer': instance.musicShelfRenderer,
     };

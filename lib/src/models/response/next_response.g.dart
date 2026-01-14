@@ -90,30 +90,6 @@ Map<String, dynamic> _$$WatchNextTabbedResultsRendererImplToJson(
       'tabs': instance.tabs,
     };
 
-_$TwoColumnWatchNextResultsImpl _$$TwoColumnWatchNextResultsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$TwoColumnWatchNextResultsImpl(
-      tabs: (json['tabs'] as List<dynamic>)
-          .map((e) => Tab.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      secondaryResults: json['secondaryResults'] == null
-          ? null
-          : SecondaryResults.fromJson(
-              json['secondaryResults'] as Map<String, dynamic>),
-      playlist: json['playlist'] == null
-          ? null
-          : PlaylistPanelRenderer.fromJson(
-              json['playlist'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$$TwoColumnWatchNextResultsImplToJson(
-        _$TwoColumnWatchNextResultsImpl instance) =>
-    <String, dynamic>{
-      'tabs': instance.tabs,
-      'secondaryResults': instance.secondaryResults,
-      'playlist': instance.playlist,
-    };
-
 _$NextContinuationContentsImpl _$$NextContinuationContentsImplFromJson(
         Map<String, dynamic> json) =>
     _$NextContinuationContentsImpl(

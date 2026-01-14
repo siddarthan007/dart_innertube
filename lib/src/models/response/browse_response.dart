@@ -22,6 +22,7 @@ class BrowseResponse with _$BrowseResponse {
     ResponseContext? responseContext,
     BrowseContents? contents,
     BrowseContinuationContents? continuationContents,
+    List<ResponseAction>? onResponseReceivedActions,
     ThumbnailRenderer? background,
     BrowseHeader? header,
     Microformat? microformat,
@@ -144,4 +145,35 @@ class MicroformatDataRenderer with _$MicroformatDataRenderer {
 
   factory MicroformatDataRenderer.fromJson(Map<String, dynamic> json) =>
       _$MicroformatDataRendererFromJson(json);
+}
+
+/// Mirrors Kotlin `BrowseResponse.ResponseAction` used for continuation appends.
+@freezed
+class ResponseAction with _$ResponseAction {
+  const factory ResponseAction({
+    AppendContinuationItemsAction? appendContinuationItemsAction,
+  }) = _ResponseAction;
+
+  factory ResponseAction.fromJson(Map<String, dynamic> json) =>
+      _$ResponseActionFromJson(json);
+}
+
+@freezed
+class AppendContinuationItemsAction with _$AppendContinuationItemsAction {
+  const factory AppendContinuationItemsAction({
+    ContinuationItems? continuationItems,
+  }) = _AppendContinuationItemsAction;
+
+  factory AppendContinuationItemsAction.fromJson(Map<String, dynamic> json) =>
+      _$AppendContinuationItemsActionFromJson(json);
+}
+
+@freezed
+class ContinuationItems with _$ContinuationItems {
+  const factory ContinuationItems({
+    List<MusicShelfContent>? continuationItems,
+  }) = _ContinuationItems;
+
+  factory ContinuationItems.fromJson(Map<String, dynamic> json) =>
+      _$ContinuationItemsFromJson(json);
 }

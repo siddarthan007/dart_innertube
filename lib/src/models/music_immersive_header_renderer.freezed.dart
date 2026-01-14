@@ -23,10 +23,15 @@ MusicImmersiveHeaderRenderer _$MusicImmersiveHeaderRendererFromJson(
 mixin _$MusicImmersiveHeaderRenderer {
   Runs get title => throw _privateConstructorUsedError;
   Runs? get description => throw _privateConstructorUsedError;
-  ThumbnailRenderer get thumbnail => throw _privateConstructorUsedError;
-  Menu? get menu => throw _privateConstructorUsedError;
+  ThumbnailRenderer? get thumbnail => throw _privateConstructorUsedError;
+  Button? get playButton => throw _privateConstructorUsedError;
+  Button? get startRadioButton => throw _privateConstructorUsedError;
   SubscriptionButton? get subscriptionButton =>
       throw _privateConstructorUsedError;
+  Menu get menu => throw _privateConstructorUsedError;
+  SubscriptionButton2? get subscriptionButton2 =>
+      throw _privateConstructorUsedError;
+  Runs? get monthlyListenerCount => throw _privateConstructorUsedError;
 
   /// Serializes this MusicImmersiveHeaderRenderer to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,15 +54,23 @@ abstract class $MusicImmersiveHeaderRendererCopyWith<$Res> {
   $Res call(
       {Runs title,
       Runs? description,
-      ThumbnailRenderer thumbnail,
-      Menu? menu,
-      SubscriptionButton? subscriptionButton});
+      ThumbnailRenderer? thumbnail,
+      Button? playButton,
+      Button? startRadioButton,
+      SubscriptionButton? subscriptionButton,
+      Menu menu,
+      SubscriptionButton2? subscriptionButton2,
+      Runs? monthlyListenerCount});
 
   $RunsCopyWith<$Res> get title;
   $RunsCopyWith<$Res>? get description;
-  $ThumbnailRendererCopyWith<$Res> get thumbnail;
-  $MenuCopyWith<$Res>? get menu;
+  $ThumbnailRendererCopyWith<$Res>? get thumbnail;
+  $ButtonCopyWith<$Res>? get playButton;
+  $ButtonCopyWith<$Res>? get startRadioButton;
   $SubscriptionButtonCopyWith<$Res>? get subscriptionButton;
+  $MenuCopyWith<$Res> get menu;
+  $SubscriptionButton2CopyWith<$Res>? get subscriptionButton2;
+  $RunsCopyWith<$Res>? get monthlyListenerCount;
 }
 
 /// @nodoc
@@ -78,9 +91,13 @@ class _$MusicImmersiveHeaderRendererCopyWithImpl<$Res,
   $Res call({
     Object? title = null,
     Object? description = freezed,
-    Object? thumbnail = null,
-    Object? menu = freezed,
+    Object? thumbnail = freezed,
+    Object? playButton = freezed,
+    Object? startRadioButton = freezed,
     Object? subscriptionButton = freezed,
+    Object? menu = null,
+    Object? subscriptionButton2 = freezed,
+    Object? monthlyListenerCount = freezed,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -91,18 +108,34 @@ class _$MusicImmersiveHeaderRendererCopyWithImpl<$Res,
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as Runs?,
-      thumbnail: null == thumbnail
+      thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
-              as ThumbnailRenderer,
-      menu: freezed == menu
-          ? _value.menu
-          : menu // ignore: cast_nullable_to_non_nullable
-              as Menu?,
+              as ThumbnailRenderer?,
+      playButton: freezed == playButton
+          ? _value.playButton
+          : playButton // ignore: cast_nullable_to_non_nullable
+              as Button?,
+      startRadioButton: freezed == startRadioButton
+          ? _value.startRadioButton
+          : startRadioButton // ignore: cast_nullable_to_non_nullable
+              as Button?,
       subscriptionButton: freezed == subscriptionButton
           ? _value.subscriptionButton
           : subscriptionButton // ignore: cast_nullable_to_non_nullable
               as SubscriptionButton?,
+      menu: null == menu
+          ? _value.menu
+          : menu // ignore: cast_nullable_to_non_nullable
+              as Menu,
+      subscriptionButton2: freezed == subscriptionButton2
+          ? _value.subscriptionButton2
+          : subscriptionButton2 // ignore: cast_nullable_to_non_nullable
+              as SubscriptionButton2?,
+      monthlyListenerCount: freezed == monthlyListenerCount
+          ? _value.monthlyListenerCount
+          : monthlyListenerCount // ignore: cast_nullable_to_non_nullable
+              as Runs?,
     ) as $Val);
   }
 
@@ -134,8 +167,12 @@ class _$MusicImmersiveHeaderRendererCopyWithImpl<$Res,
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ThumbnailRendererCopyWith<$Res> get thumbnail {
-    return $ThumbnailRendererCopyWith<$Res>(_value.thumbnail, (value) {
+  $ThumbnailRendererCopyWith<$Res>? get thumbnail {
+    if (_value.thumbnail == null) {
+      return null;
+    }
+
+    return $ThumbnailRendererCopyWith<$Res>(_value.thumbnail!, (value) {
       return _then(_value.copyWith(thumbnail: value) as $Val);
     });
   }
@@ -144,13 +181,27 @@ class _$MusicImmersiveHeaderRendererCopyWithImpl<$Res,
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $MenuCopyWith<$Res>? get menu {
-    if (_value.menu == null) {
+  $ButtonCopyWith<$Res>? get playButton {
+    if (_value.playButton == null) {
       return null;
     }
 
-    return $MenuCopyWith<$Res>(_value.menu!, (value) {
-      return _then(_value.copyWith(menu: value) as $Val);
+    return $ButtonCopyWith<$Res>(_value.playButton!, (value) {
+      return _then(_value.copyWith(playButton: value) as $Val);
+    });
+  }
+
+  /// Create a copy of MusicImmersiveHeaderRenderer
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ButtonCopyWith<$Res>? get startRadioButton {
+    if (_value.startRadioButton == null) {
+      return null;
+    }
+
+    return $ButtonCopyWith<$Res>(_value.startRadioButton!, (value) {
+      return _then(_value.copyWith(startRadioButton: value) as $Val);
     });
   }
 
@@ -168,6 +219,45 @@ class _$MusicImmersiveHeaderRendererCopyWithImpl<$Res,
       return _then(_value.copyWith(subscriptionButton: value) as $Val);
     });
   }
+
+  /// Create a copy of MusicImmersiveHeaderRenderer
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MenuCopyWith<$Res> get menu {
+    return $MenuCopyWith<$Res>(_value.menu, (value) {
+      return _then(_value.copyWith(menu: value) as $Val);
+    });
+  }
+
+  /// Create a copy of MusicImmersiveHeaderRenderer
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SubscriptionButton2CopyWith<$Res>? get subscriptionButton2 {
+    if (_value.subscriptionButton2 == null) {
+      return null;
+    }
+
+    return $SubscriptionButton2CopyWith<$Res>(_value.subscriptionButton2!,
+        (value) {
+      return _then(_value.copyWith(subscriptionButton2: value) as $Val);
+    });
+  }
+
+  /// Create a copy of MusicImmersiveHeaderRenderer
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RunsCopyWith<$Res>? get monthlyListenerCount {
+    if (_value.monthlyListenerCount == null) {
+      return null;
+    }
+
+    return $RunsCopyWith<$Res>(_value.monthlyListenerCount!, (value) {
+      return _then(_value.copyWith(monthlyListenerCount: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -182,20 +272,32 @@ abstract class _$$MusicImmersiveHeaderRendererImplCopyWith<$Res>
   $Res call(
       {Runs title,
       Runs? description,
-      ThumbnailRenderer thumbnail,
-      Menu? menu,
-      SubscriptionButton? subscriptionButton});
+      ThumbnailRenderer? thumbnail,
+      Button? playButton,
+      Button? startRadioButton,
+      SubscriptionButton? subscriptionButton,
+      Menu menu,
+      SubscriptionButton2? subscriptionButton2,
+      Runs? monthlyListenerCount});
 
   @override
   $RunsCopyWith<$Res> get title;
   @override
   $RunsCopyWith<$Res>? get description;
   @override
-  $ThumbnailRendererCopyWith<$Res> get thumbnail;
+  $ThumbnailRendererCopyWith<$Res>? get thumbnail;
   @override
-  $MenuCopyWith<$Res>? get menu;
+  $ButtonCopyWith<$Res>? get playButton;
+  @override
+  $ButtonCopyWith<$Res>? get startRadioButton;
   @override
   $SubscriptionButtonCopyWith<$Res>? get subscriptionButton;
+  @override
+  $MenuCopyWith<$Res> get menu;
+  @override
+  $SubscriptionButton2CopyWith<$Res>? get subscriptionButton2;
+  @override
+  $RunsCopyWith<$Res>? get monthlyListenerCount;
 }
 
 /// @nodoc
@@ -215,9 +317,13 @@ class __$$MusicImmersiveHeaderRendererImplCopyWithImpl<$Res>
   $Res call({
     Object? title = null,
     Object? description = freezed,
-    Object? thumbnail = null,
-    Object? menu = freezed,
+    Object? thumbnail = freezed,
+    Object? playButton = freezed,
+    Object? startRadioButton = freezed,
     Object? subscriptionButton = freezed,
+    Object? menu = null,
+    Object? subscriptionButton2 = freezed,
+    Object? monthlyListenerCount = freezed,
   }) {
     return _then(_$MusicImmersiveHeaderRendererImpl(
       title: null == title
@@ -228,18 +334,34 @@ class __$$MusicImmersiveHeaderRendererImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as Runs?,
-      thumbnail: null == thumbnail
+      thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
-              as ThumbnailRenderer,
-      menu: freezed == menu
-          ? _value.menu
-          : menu // ignore: cast_nullable_to_non_nullable
-              as Menu?,
+              as ThumbnailRenderer?,
+      playButton: freezed == playButton
+          ? _value.playButton
+          : playButton // ignore: cast_nullable_to_non_nullable
+              as Button?,
+      startRadioButton: freezed == startRadioButton
+          ? _value.startRadioButton
+          : startRadioButton // ignore: cast_nullable_to_non_nullable
+              as Button?,
       subscriptionButton: freezed == subscriptionButton
           ? _value.subscriptionButton
           : subscriptionButton // ignore: cast_nullable_to_non_nullable
               as SubscriptionButton?,
+      menu: null == menu
+          ? _value.menu
+          : menu // ignore: cast_nullable_to_non_nullable
+              as Menu,
+      subscriptionButton2: freezed == subscriptionButton2
+          ? _value.subscriptionButton2
+          : subscriptionButton2 // ignore: cast_nullable_to_non_nullable
+              as SubscriptionButton2?,
+      monthlyListenerCount: freezed == monthlyListenerCount
+          ? _value.monthlyListenerCount
+          : monthlyListenerCount // ignore: cast_nullable_to_non_nullable
+              as Runs?,
     ));
   }
 }
@@ -251,9 +373,13 @@ class _$MusicImmersiveHeaderRendererImpl
   const _$MusicImmersiveHeaderRendererImpl(
       {required this.title,
       this.description,
-      required this.thumbnail,
-      this.menu,
-      this.subscriptionButton});
+      this.thumbnail,
+      this.playButton,
+      this.startRadioButton,
+      this.subscriptionButton,
+      required this.menu,
+      this.subscriptionButton2,
+      this.monthlyListenerCount});
 
   factory _$MusicImmersiveHeaderRendererImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -264,15 +390,23 @@ class _$MusicImmersiveHeaderRendererImpl
   @override
   final Runs? description;
   @override
-  final ThumbnailRenderer thumbnail;
+  final ThumbnailRenderer? thumbnail;
   @override
-  final Menu? menu;
+  final Button? playButton;
+  @override
+  final Button? startRadioButton;
   @override
   final SubscriptionButton? subscriptionButton;
+  @override
+  final Menu menu;
+  @override
+  final SubscriptionButton2? subscriptionButton2;
+  @override
+  final Runs? monthlyListenerCount;
 
   @override
   String toString() {
-    return 'MusicImmersiveHeaderRenderer(title: $title, description: $description, thumbnail: $thumbnail, menu: $menu, subscriptionButton: $subscriptionButton)';
+    return 'MusicImmersiveHeaderRenderer(title: $title, description: $description, thumbnail: $thumbnail, playButton: $playButton, startRadioButton: $startRadioButton, subscriptionButton: $subscriptionButton, menu: $menu, subscriptionButton2: $subscriptionButton2, monthlyListenerCount: $monthlyListenerCount)';
   }
 
   @override
@@ -285,15 +419,32 @@ class _$MusicImmersiveHeaderRendererImpl
                 other.description == description) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
-            (identical(other.menu, menu) || other.menu == menu) &&
+            (identical(other.playButton, playButton) ||
+                other.playButton == playButton) &&
+            (identical(other.startRadioButton, startRadioButton) ||
+                other.startRadioButton == startRadioButton) &&
             (identical(other.subscriptionButton, subscriptionButton) ||
-                other.subscriptionButton == subscriptionButton));
+                other.subscriptionButton == subscriptionButton) &&
+            (identical(other.menu, menu) || other.menu == menu) &&
+            (identical(other.subscriptionButton2, subscriptionButton2) ||
+                other.subscriptionButton2 == subscriptionButton2) &&
+            (identical(other.monthlyListenerCount, monthlyListenerCount) ||
+                other.monthlyListenerCount == monthlyListenerCount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, title, description, thumbnail, menu, subscriptionButton);
+      runtimeType,
+      title,
+      description,
+      thumbnail,
+      playButton,
+      startRadioButton,
+      subscriptionButton,
+      menu,
+      subscriptionButton2,
+      monthlyListenerCount);
 
   /// Create a copy of MusicImmersiveHeaderRenderer
   /// with the given fields replaced by the non-null parameter values.
@@ -316,12 +467,15 @@ class _$MusicImmersiveHeaderRendererImpl
 abstract class _MusicImmersiveHeaderRenderer
     implements MusicImmersiveHeaderRenderer {
   const factory _MusicImmersiveHeaderRenderer(
-          {required final Runs title,
-          final Runs? description,
-          required final ThumbnailRenderer thumbnail,
-          final Menu? menu,
-          final SubscriptionButton? subscriptionButton}) =
-      _$MusicImmersiveHeaderRendererImpl;
+      {required final Runs title,
+      final Runs? description,
+      final ThumbnailRenderer? thumbnail,
+      final Button? playButton,
+      final Button? startRadioButton,
+      final SubscriptionButton? subscriptionButton,
+      required final Menu menu,
+      final SubscriptionButton2? subscriptionButton2,
+      final Runs? monthlyListenerCount}) = _$MusicImmersiveHeaderRendererImpl;
 
   factory _MusicImmersiveHeaderRenderer.fromJson(Map<String, dynamic> json) =
       _$MusicImmersiveHeaderRendererImpl.fromJson;
@@ -331,11 +485,19 @@ abstract class _MusicImmersiveHeaderRenderer
   @override
   Runs? get description;
   @override
-  ThumbnailRenderer get thumbnail;
+  ThumbnailRenderer? get thumbnail;
   @override
-  Menu? get menu;
+  Button? get playButton;
+  @override
+  Button? get startRadioButton;
   @override
   SubscriptionButton? get subscriptionButton;
+  @override
+  Menu get menu;
+  @override
+  SubscriptionButton2? get subscriptionButton2;
+  @override
+  Runs? get monthlyListenerCount;
 
   /// Create a copy of MusicImmersiveHeaderRenderer
   /// with the given fields replaced by the non-null parameter values.
@@ -346,165 +508,362 @@ abstract class _MusicImmersiveHeaderRenderer
       get copyWith => throw _privateConstructorUsedError;
 }
 
-SubscriptionButton _$SubscriptionButtonFromJson(Map<String, dynamic> json) {
-  return _SubscriptionButton.fromJson(json);
+SubscriptionButton2 _$SubscriptionButton2FromJson(Map<String, dynamic> json) {
+  return _SubscriptionButton2.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SubscriptionButton {
-  Map<String, dynamic> get subscribeButtonRenderer =>
+mixin _$SubscriptionButton2 {
+  SubscribeButtonRenderer2? get subscribeButtonRenderer =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this SubscriptionButton to a JSON map.
+  /// Serializes this SubscriptionButton2 to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of SubscriptionButton
+  /// Create a copy of SubscriptionButton2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $SubscriptionButtonCopyWith<SubscriptionButton> get copyWith =>
+  $SubscriptionButton2CopyWith<SubscriptionButton2> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SubscriptionButtonCopyWith<$Res> {
-  factory $SubscriptionButtonCopyWith(
-          SubscriptionButton value, $Res Function(SubscriptionButton) then) =
-      _$SubscriptionButtonCopyWithImpl<$Res, SubscriptionButton>;
+abstract class $SubscriptionButton2CopyWith<$Res> {
+  factory $SubscriptionButton2CopyWith(
+          SubscriptionButton2 value, $Res Function(SubscriptionButton2) then) =
+      _$SubscriptionButton2CopyWithImpl<$Res, SubscriptionButton2>;
   @useResult
-  $Res call({Map<String, dynamic> subscribeButtonRenderer});
+  $Res call({SubscribeButtonRenderer2? subscribeButtonRenderer});
+
+  $SubscribeButtonRenderer2CopyWith<$Res>? get subscribeButtonRenderer;
 }
 
 /// @nodoc
-class _$SubscriptionButtonCopyWithImpl<$Res, $Val extends SubscriptionButton>
-    implements $SubscriptionButtonCopyWith<$Res> {
-  _$SubscriptionButtonCopyWithImpl(this._value, this._then);
+class _$SubscriptionButton2CopyWithImpl<$Res, $Val extends SubscriptionButton2>
+    implements $SubscriptionButton2CopyWith<$Res> {
+  _$SubscriptionButton2CopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SubscriptionButton
+  /// Create a copy of SubscriptionButton2
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? subscribeButtonRenderer = null,
+    Object? subscribeButtonRenderer = freezed,
   }) {
     return _then(_value.copyWith(
-      subscribeButtonRenderer: null == subscribeButtonRenderer
+      subscribeButtonRenderer: freezed == subscribeButtonRenderer
           ? _value.subscribeButtonRenderer
           : subscribeButtonRenderer // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SubscribeButtonRenderer2?,
     ) as $Val);
+  }
+
+  /// Create a copy of SubscriptionButton2
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SubscribeButtonRenderer2CopyWith<$Res>? get subscribeButtonRenderer {
+    if (_value.subscribeButtonRenderer == null) {
+      return null;
+    }
+
+    return $SubscribeButtonRenderer2CopyWith<$Res>(
+        _value.subscribeButtonRenderer!, (value) {
+      return _then(_value.copyWith(subscribeButtonRenderer: value) as $Val);
+    });
   }
 }
 
 /// @nodoc
-abstract class _$$SubscriptionButtonImplCopyWith<$Res>
-    implements $SubscriptionButtonCopyWith<$Res> {
-  factory _$$SubscriptionButtonImplCopyWith(_$SubscriptionButtonImpl value,
-          $Res Function(_$SubscriptionButtonImpl) then) =
-      __$$SubscriptionButtonImplCopyWithImpl<$Res>;
+abstract class _$$SubscriptionButton2ImplCopyWith<$Res>
+    implements $SubscriptionButton2CopyWith<$Res> {
+  factory _$$SubscriptionButton2ImplCopyWith(_$SubscriptionButton2Impl value,
+          $Res Function(_$SubscriptionButton2Impl) then) =
+      __$$SubscriptionButton2ImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<String, dynamic> subscribeButtonRenderer});
+  $Res call({SubscribeButtonRenderer2? subscribeButtonRenderer});
+
+  @override
+  $SubscribeButtonRenderer2CopyWith<$Res>? get subscribeButtonRenderer;
 }
 
 /// @nodoc
-class __$$SubscriptionButtonImplCopyWithImpl<$Res>
-    extends _$SubscriptionButtonCopyWithImpl<$Res, _$SubscriptionButtonImpl>
-    implements _$$SubscriptionButtonImplCopyWith<$Res> {
-  __$$SubscriptionButtonImplCopyWithImpl(_$SubscriptionButtonImpl _value,
-      $Res Function(_$SubscriptionButtonImpl) _then)
+class __$$SubscriptionButton2ImplCopyWithImpl<$Res>
+    extends _$SubscriptionButton2CopyWithImpl<$Res, _$SubscriptionButton2Impl>
+    implements _$$SubscriptionButton2ImplCopyWith<$Res> {
+  __$$SubscriptionButton2ImplCopyWithImpl(_$SubscriptionButton2Impl _value,
+      $Res Function(_$SubscriptionButton2Impl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SubscriptionButton
+  /// Create a copy of SubscriptionButton2
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? subscribeButtonRenderer = null,
+    Object? subscribeButtonRenderer = freezed,
   }) {
-    return _then(_$SubscriptionButtonImpl(
-      subscribeButtonRenderer: null == subscribeButtonRenderer
-          ? _value._subscribeButtonRenderer
+    return _then(_$SubscriptionButton2Impl(
+      subscribeButtonRenderer: freezed == subscribeButtonRenderer
+          ? _value.subscribeButtonRenderer
           : subscribeButtonRenderer // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SubscribeButtonRenderer2?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$SubscriptionButtonImpl implements _SubscriptionButton {
-  const _$SubscriptionButtonImpl(
-      {required final Map<String, dynamic> subscribeButtonRenderer})
-      : _subscribeButtonRenderer = subscribeButtonRenderer;
+class _$SubscriptionButton2Impl implements _SubscriptionButton2 {
+  const _$SubscriptionButton2Impl({this.subscribeButtonRenderer});
 
-  factory _$SubscriptionButtonImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SubscriptionButtonImplFromJson(json);
+  factory _$SubscriptionButton2Impl.fromJson(Map<String, dynamic> json) =>
+      _$$SubscriptionButton2ImplFromJson(json);
 
-  final Map<String, dynamic> _subscribeButtonRenderer;
   @override
-  Map<String, dynamic> get subscribeButtonRenderer {
-    if (_subscribeButtonRenderer is EqualUnmodifiableMapView)
-      return _subscribeButtonRenderer;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_subscribeButtonRenderer);
-  }
+  final SubscribeButtonRenderer2? subscribeButtonRenderer;
 
   @override
   String toString() {
-    return 'SubscriptionButton(subscribeButtonRenderer: $subscribeButtonRenderer)';
+    return 'SubscriptionButton2(subscribeButtonRenderer: $subscribeButtonRenderer)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SubscriptionButtonImpl &&
-            const DeepCollectionEquality().equals(
-                other._subscribeButtonRenderer, _subscribeButtonRenderer));
+            other is _$SubscriptionButton2Impl &&
+            (identical(
+                    other.subscribeButtonRenderer, subscribeButtonRenderer) ||
+                other.subscribeButtonRenderer == subscribeButtonRenderer));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_subscribeButtonRenderer));
+  int get hashCode => Object.hash(runtimeType, subscribeButtonRenderer);
 
-  /// Create a copy of SubscriptionButton
+  /// Create a copy of SubscriptionButton2
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SubscriptionButtonImplCopyWith<_$SubscriptionButtonImpl> get copyWith =>
-      __$$SubscriptionButtonImplCopyWithImpl<_$SubscriptionButtonImpl>(
+  _$$SubscriptionButton2ImplCopyWith<_$SubscriptionButton2Impl> get copyWith =>
+      __$$SubscriptionButton2ImplCopyWithImpl<_$SubscriptionButton2Impl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SubscriptionButtonImplToJson(
+    return _$$SubscriptionButton2ImplToJson(
       this,
     );
   }
 }
 
-abstract class _SubscriptionButton implements SubscriptionButton {
-  const factory _SubscriptionButton(
-          {required final Map<String, dynamic> subscribeButtonRenderer}) =
-      _$SubscriptionButtonImpl;
+abstract class _SubscriptionButton2 implements SubscriptionButton2 {
+  const factory _SubscriptionButton2(
+          {final SubscribeButtonRenderer2? subscribeButtonRenderer}) =
+      _$SubscriptionButton2Impl;
 
-  factory _SubscriptionButton.fromJson(Map<String, dynamic> json) =
-      _$SubscriptionButtonImpl.fromJson;
+  factory _SubscriptionButton2.fromJson(Map<String, dynamic> json) =
+      _$SubscriptionButton2Impl.fromJson;
 
   @override
-  Map<String, dynamic> get subscribeButtonRenderer;
+  SubscribeButtonRenderer2? get subscribeButtonRenderer;
 
-  /// Create a copy of SubscriptionButton
+  /// Create a copy of SubscriptionButton2
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SubscriptionButtonImplCopyWith<_$SubscriptionButtonImpl> get copyWith =>
+  _$$SubscriptionButton2ImplCopyWith<_$SubscriptionButton2Impl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+SubscribeButtonRenderer2 _$SubscribeButtonRenderer2FromJson(
+    Map<String, dynamic> json) {
+  return _SubscribeButtonRenderer2.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SubscribeButtonRenderer2 {
+  Runs? get subscriberCountWithSubscribeText =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this SubscribeButtonRenderer2 to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of SubscribeButtonRenderer2
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $SubscribeButtonRenderer2CopyWith<SubscribeButtonRenderer2> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SubscribeButtonRenderer2CopyWith<$Res> {
+  factory $SubscribeButtonRenderer2CopyWith(SubscribeButtonRenderer2 value,
+          $Res Function(SubscribeButtonRenderer2) then) =
+      _$SubscribeButtonRenderer2CopyWithImpl<$Res, SubscribeButtonRenderer2>;
+  @useResult
+  $Res call({Runs? subscriberCountWithSubscribeText});
+
+  $RunsCopyWith<$Res>? get subscriberCountWithSubscribeText;
+}
+
+/// @nodoc
+class _$SubscribeButtonRenderer2CopyWithImpl<$Res,
+        $Val extends SubscribeButtonRenderer2>
+    implements $SubscribeButtonRenderer2CopyWith<$Res> {
+  _$SubscribeButtonRenderer2CopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of SubscribeButtonRenderer2
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? subscriberCountWithSubscribeText = freezed,
+  }) {
+    return _then(_value.copyWith(
+      subscriberCountWithSubscribeText: freezed ==
+              subscriberCountWithSubscribeText
+          ? _value.subscriberCountWithSubscribeText
+          : subscriberCountWithSubscribeText // ignore: cast_nullable_to_non_nullable
+              as Runs?,
+    ) as $Val);
+  }
+
+  /// Create a copy of SubscribeButtonRenderer2
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RunsCopyWith<$Res>? get subscriberCountWithSubscribeText {
+    if (_value.subscriberCountWithSubscribeText == null) {
+      return null;
+    }
+
+    return $RunsCopyWith<$Res>(_value.subscriberCountWithSubscribeText!,
+        (value) {
+      return _then(
+          _value.copyWith(subscriberCountWithSubscribeText: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$SubscribeButtonRenderer2ImplCopyWith<$Res>
+    implements $SubscribeButtonRenderer2CopyWith<$Res> {
+  factory _$$SubscribeButtonRenderer2ImplCopyWith(
+          _$SubscribeButtonRenderer2Impl value,
+          $Res Function(_$SubscribeButtonRenderer2Impl) then) =
+      __$$SubscribeButtonRenderer2ImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({Runs? subscriberCountWithSubscribeText});
+
+  @override
+  $RunsCopyWith<$Res>? get subscriberCountWithSubscribeText;
+}
+
+/// @nodoc
+class __$$SubscribeButtonRenderer2ImplCopyWithImpl<$Res>
+    extends _$SubscribeButtonRenderer2CopyWithImpl<$Res,
+        _$SubscribeButtonRenderer2Impl>
+    implements _$$SubscribeButtonRenderer2ImplCopyWith<$Res> {
+  __$$SubscribeButtonRenderer2ImplCopyWithImpl(
+      _$SubscribeButtonRenderer2Impl _value,
+      $Res Function(_$SubscribeButtonRenderer2Impl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SubscribeButtonRenderer2
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? subscriberCountWithSubscribeText = freezed,
+  }) {
+    return _then(_$SubscribeButtonRenderer2Impl(
+      subscriberCountWithSubscribeText: freezed ==
+              subscriberCountWithSubscribeText
+          ? _value.subscriberCountWithSubscribeText
+          : subscriberCountWithSubscribeText // ignore: cast_nullable_to_non_nullable
+              as Runs?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SubscribeButtonRenderer2Impl implements _SubscribeButtonRenderer2 {
+  const _$SubscribeButtonRenderer2Impl({this.subscriberCountWithSubscribeText});
+
+  factory _$SubscribeButtonRenderer2Impl.fromJson(Map<String, dynamic> json) =>
+      _$$SubscribeButtonRenderer2ImplFromJson(json);
+
+  @override
+  final Runs? subscriberCountWithSubscribeText;
+
+  @override
+  String toString() {
+    return 'SubscribeButtonRenderer2(subscriberCountWithSubscribeText: $subscriberCountWithSubscribeText)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SubscribeButtonRenderer2Impl &&
+            (identical(other.subscriberCountWithSubscribeText,
+                    subscriberCountWithSubscribeText) ||
+                other.subscriberCountWithSubscribeText ==
+                    subscriberCountWithSubscribeText));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, subscriberCountWithSubscribeText);
+
+  /// Create a copy of SubscribeButtonRenderer2
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SubscribeButtonRenderer2ImplCopyWith<_$SubscribeButtonRenderer2Impl>
+      get copyWith => __$$SubscribeButtonRenderer2ImplCopyWithImpl<
+          _$SubscribeButtonRenderer2Impl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SubscribeButtonRenderer2ImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SubscribeButtonRenderer2 implements SubscribeButtonRenderer2 {
+  const factory _SubscribeButtonRenderer2(
+          {final Runs? subscriberCountWithSubscribeText}) =
+      _$SubscribeButtonRenderer2Impl;
+
+  factory _SubscribeButtonRenderer2.fromJson(Map<String, dynamic> json) =
+      _$SubscribeButtonRenderer2Impl.fromJson;
+
+  @override
+  Runs? get subscriberCountWithSubscribeText;
+
+  /// Create a copy of SubscribeButtonRenderer2
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SubscribeButtonRenderer2ImplCopyWith<_$SubscribeButtonRenderer2Impl>
+      get copyWith => throw _privateConstructorUsedError;
 }

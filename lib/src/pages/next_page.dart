@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import '../models/yt_item.dart';
 import '../models/endpoint.dart';
 import '../models/playlist_panel_video_renderer.dart';
+import 'page_helper.dart';
 import '../utils/utils.dart';
 
 class NextResult {
@@ -71,16 +72,17 @@ class NextPage {
     if (artists.isEmpty) return null;
 
     final albumRun = albumRuns?.firstOrNull;
-    final album = albumRun != null &&
-            albumRun.navigationEndpoint?.browseEndpoint != null
-        ? Album(
-            name: albumRun.text,
-            id: albumRun.navigationEndpoint!.browseEndpoint!.browseId,
-          )
-        : null;
+    final album =
+        albumRun != null && albumRun.navigationEndpoint?.browseEndpoint != null
+            ? Album(
+                name: albumRun.text,
+                id: albumRun.navigationEndpoint!.browseEndpoint!.browseId,
+              )
+            : null;
 
     final durationText = renderer.lengthText?.runs?.firstOrNull?.text;
-    final duration = durationText != null ? Utils.parseTime(durationText) : null;
+    final duration =
+        durationText != null ? Utils.parseTime(durationText) : null;
     if (duration == null) return null;
 
     final thumbnail = renderer.thumbnail.thumbnails.lastOrNull?.url;
@@ -98,6 +100,24 @@ class NextPage {
               b.musicInlineBadgeRenderer?.icon.iconType ==
               'MUSIC_EXPLICIT_BADGE') ??
           false,
+      libraryAddToken: PageHelper.extractFeedbackToken(
+        renderer.menu?.menuRenderer.items
+            ?.firstWhereOrNull((it) =>
+                it.toggleMenuServiceItemRenderer?.defaultIcon.iconType
+                    .startsWith('LIBRARY_') ==
+                true)
+            ?.toggleMenuServiceItemRenderer,
+        'LIBRARY_ADD',
+      ),
+      libraryRemoveToken: PageHelper.extractFeedbackToken(
+        renderer.menu?.menuRenderer.items
+            ?.firstWhereOrNull((it) =>
+                it.toggleMenuServiceItemRenderer?.defaultIcon.iconType
+                    .startsWith('LIBRARY_') ==
+                true)
+            ?.toggleMenuServiceItemRenderer,
+        'LIBRARY_SAVED',
+      ),
     );
   }
 

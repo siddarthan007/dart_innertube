@@ -1132,6 +1132,7 @@ mixin _$Format {
   double? get loudnessDb => throw _privateConstructorUsedError;
   dynamic get lastModified => throw _privateConstructorUsedError;
   String? get signatureCipher => throw _privateConstructorUsedError;
+  AudioTrack? get audioTrack => throw _privateConstructorUsedError;
 
   /// Serializes this Format to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1165,7 +1166,10 @@ abstract class $FormatCopyWith<$Res> {
       int? audioChannels,
       @JsonKey(fromJson: _doubleFromDynamic) double? loudnessDb,
       dynamic lastModified,
-      String? signatureCipher});
+      String? signatureCipher,
+      AudioTrack? audioTrack});
+
+  $AudioTrackCopyWith<$Res>? get audioTrack;
 }
 
 /// @nodoc
@@ -1201,6 +1205,7 @@ class _$FormatCopyWithImpl<$Res, $Val extends Format>
     Object? loudnessDb = freezed,
     Object? lastModified = freezed,
     Object? signatureCipher = freezed,
+    Object? audioTrack = freezed,
   }) {
     return _then(_value.copyWith(
       itag: null == itag
@@ -1275,7 +1280,25 @@ class _$FormatCopyWithImpl<$Res, $Val extends Format>
           ? _value.signatureCipher
           : signatureCipher // ignore: cast_nullable_to_non_nullable
               as String?,
+      audioTrack: freezed == audioTrack
+          ? _value.audioTrack
+          : audioTrack // ignore: cast_nullable_to_non_nullable
+              as AudioTrack?,
     ) as $Val);
+  }
+
+  /// Create a copy of Format
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AudioTrackCopyWith<$Res>? get audioTrack {
+    if (_value.audioTrack == null) {
+      return null;
+    }
+
+    return $AudioTrackCopyWith<$Res>(_value.audioTrack!, (value) {
+      return _then(_value.copyWith(audioTrack: value) as $Val);
+    });
   }
 }
 
@@ -1304,7 +1327,11 @@ abstract class _$$FormatImplCopyWith<$Res> implements $FormatCopyWith<$Res> {
       int? audioChannels,
       @JsonKey(fromJson: _doubleFromDynamic) double? loudnessDb,
       dynamic lastModified,
-      String? signatureCipher});
+      String? signatureCipher,
+      AudioTrack? audioTrack});
+
+  @override
+  $AudioTrackCopyWith<$Res>? get audioTrack;
 }
 
 /// @nodoc
@@ -1338,6 +1365,7 @@ class __$$FormatImplCopyWithImpl<$Res>
     Object? loudnessDb = freezed,
     Object? lastModified = freezed,
     Object? signatureCipher = freezed,
+    Object? audioTrack = freezed,
   }) {
     return _then(_$FormatImpl(
       itag: null == itag
@@ -1412,6 +1440,10 @@ class __$$FormatImplCopyWithImpl<$Res>
           ? _value.signatureCipher
           : signatureCipher // ignore: cast_nullable_to_non_nullable
               as String?,
+      audioTrack: freezed == audioTrack
+          ? _value.audioTrack
+          : audioTrack // ignore: cast_nullable_to_non_nullable
+              as AudioTrack?,
     ));
   }
 }
@@ -1437,7 +1469,8 @@ class _$FormatImpl extends _Format {
       this.audioChannels,
       @JsonKey(fromJson: _doubleFromDynamic) this.loudnessDb,
       this.lastModified,
-      this.signatureCipher})
+      this.signatureCipher,
+      this.audioTrack})
       : super._();
 
   factory _$FormatImpl.fromJson(Map<String, dynamic> json) =>
@@ -1482,10 +1515,12 @@ class _$FormatImpl extends _Format {
   final dynamic lastModified;
   @override
   final String? signatureCipher;
+  @override
+  final AudioTrack? audioTrack;
 
   @override
   String toString() {
-    return 'Format(itag: $itag, url: $url, mimeType: $mimeType, bitrate: $bitrate, width: $width, height: $height, contentLength: $contentLength, quality: $quality, fps: $fps, qualityLabel: $qualityLabel, averageBitrate: $averageBitrate, audioQuality: $audioQuality, approxDurationMs: $approxDurationMs, audioSampleRate: $audioSampleRate, audioChannels: $audioChannels, loudnessDb: $loudnessDb, lastModified: $lastModified, signatureCipher: $signatureCipher)';
+    return 'Format(itag: $itag, url: $url, mimeType: $mimeType, bitrate: $bitrate, width: $width, height: $height, contentLength: $contentLength, quality: $quality, fps: $fps, qualityLabel: $qualityLabel, averageBitrate: $averageBitrate, audioQuality: $audioQuality, approxDurationMs: $approxDurationMs, audioSampleRate: $audioSampleRate, audioChannels: $audioChannels, loudnessDb: $loudnessDb, lastModified: $lastModified, signatureCipher: $signatureCipher, audioTrack: $audioTrack)';
   }
 
   @override
@@ -1521,31 +1556,35 @@ class _$FormatImpl extends _Format {
             const DeepCollectionEquality()
                 .equals(other.lastModified, lastModified) &&
             (identical(other.signatureCipher, signatureCipher) ||
-                other.signatureCipher == signatureCipher));
+                other.signatureCipher == signatureCipher) &&
+            (identical(other.audioTrack, audioTrack) ||
+                other.audioTrack == audioTrack));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      itag,
-      url,
-      mimeType,
-      bitrate,
-      width,
-      height,
-      const DeepCollectionEquality().hash(contentLength),
-      quality,
-      fps,
-      qualityLabel,
-      averageBitrate,
-      audioQuality,
-      approxDurationMs,
-      audioSampleRate,
-      audioChannels,
-      loudnessDb,
-      const DeepCollectionEquality().hash(lastModified),
-      signatureCipher);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        itag,
+        url,
+        mimeType,
+        bitrate,
+        width,
+        height,
+        const DeepCollectionEquality().hash(contentLength),
+        quality,
+        fps,
+        qualityLabel,
+        averageBitrate,
+        audioQuality,
+        approxDurationMs,
+        audioSampleRate,
+        audioChannels,
+        loudnessDb,
+        const DeepCollectionEquality().hash(lastModified),
+        signatureCipher,
+        audioTrack
+      ]);
 
   /// Create a copy of Format
   /// with the given fields replaced by the non-null parameter values.
@@ -1582,7 +1621,8 @@ abstract class _Format extends Format {
       final int? audioChannels,
       @JsonKey(fromJson: _doubleFromDynamic) final double? loudnessDb,
       final dynamic lastModified,
-      final String? signatureCipher}) = _$FormatImpl;
+      final String? signatureCipher,
+      final AudioTrack? audioTrack}) = _$FormatImpl;
   const _Format._() : super._();
 
   factory _Format.fromJson(Map<String, dynamic> json) = _$FormatImpl.fromJson;
@@ -1625,12 +1665,200 @@ abstract class _Format extends Format {
   dynamic get lastModified;
   @override
   String? get signatureCipher;
+  @override
+  AudioTrack? get audioTrack;
 
   /// Create a copy of Format
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FormatImplCopyWith<_$FormatImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+AudioTrack _$AudioTrackFromJson(Map<String, dynamic> json) {
+  return _AudioTrack.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AudioTrack {
+  String? get displayName => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  bool? get isAutoDubbed => throw _privateConstructorUsedError;
+
+  /// Serializes this AudioTrack to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of AudioTrack
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $AudioTrackCopyWith<AudioTrack> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AudioTrackCopyWith<$Res> {
+  factory $AudioTrackCopyWith(
+          AudioTrack value, $Res Function(AudioTrack) then) =
+      _$AudioTrackCopyWithImpl<$Res, AudioTrack>;
+  @useResult
+  $Res call({String? displayName, String? id, bool? isAutoDubbed});
+}
+
+/// @nodoc
+class _$AudioTrackCopyWithImpl<$Res, $Val extends AudioTrack>
+    implements $AudioTrackCopyWith<$Res> {
+  _$AudioTrackCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of AudioTrack
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? displayName = freezed,
+    Object? id = freezed,
+    Object? isAutoDubbed = freezed,
+  }) {
+    return _then(_value.copyWith(
+      displayName: freezed == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isAutoDubbed: freezed == isAutoDubbed
+          ? _value.isAutoDubbed
+          : isAutoDubbed // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AudioTrackImplCopyWith<$Res>
+    implements $AudioTrackCopyWith<$Res> {
+  factory _$$AudioTrackImplCopyWith(
+          _$AudioTrackImpl value, $Res Function(_$AudioTrackImpl) then) =
+      __$$AudioTrackImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? displayName, String? id, bool? isAutoDubbed});
+}
+
+/// @nodoc
+class __$$AudioTrackImplCopyWithImpl<$Res>
+    extends _$AudioTrackCopyWithImpl<$Res, _$AudioTrackImpl>
+    implements _$$AudioTrackImplCopyWith<$Res> {
+  __$$AudioTrackImplCopyWithImpl(
+      _$AudioTrackImpl _value, $Res Function(_$AudioTrackImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AudioTrack
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? displayName = freezed,
+    Object? id = freezed,
+    Object? isAutoDubbed = freezed,
+  }) {
+    return _then(_$AudioTrackImpl(
+      displayName: freezed == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isAutoDubbed: freezed == isAutoDubbed
+          ? _value.isAutoDubbed
+          : isAutoDubbed // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AudioTrackImpl implements _AudioTrack {
+  const _$AudioTrackImpl({this.displayName, this.id, this.isAutoDubbed});
+
+  factory _$AudioTrackImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AudioTrackImplFromJson(json);
+
+  @override
+  final String? displayName;
+  @override
+  final String? id;
+  @override
+  final bool? isAutoDubbed;
+
+  @override
+  String toString() {
+    return 'AudioTrack(displayName: $displayName, id: $id, isAutoDubbed: $isAutoDubbed)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AudioTrackImpl &&
+            (identical(other.displayName, displayName) ||
+                other.displayName == displayName) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.isAutoDubbed, isAutoDubbed) ||
+                other.isAutoDubbed == isAutoDubbed));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, displayName, id, isAutoDubbed);
+
+  /// Create a copy of AudioTrack
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AudioTrackImplCopyWith<_$AudioTrackImpl> get copyWith =>
+      __$$AudioTrackImplCopyWithImpl<_$AudioTrackImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AudioTrackImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AudioTrack implements AudioTrack {
+  const factory _AudioTrack(
+      {final String? displayName,
+      final String? id,
+      final bool? isAutoDubbed}) = _$AudioTrackImpl;
+
+  factory _AudioTrack.fromJson(Map<String, dynamic> json) =
+      _$AudioTrackImpl.fromJson;
+
+  @override
+  String? get displayName;
+  @override
+  String? get id;
+  @override
+  bool? get isAutoDubbed;
+
+  /// Create a copy of AudioTrack
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AudioTrackImplCopyWith<_$AudioTrackImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

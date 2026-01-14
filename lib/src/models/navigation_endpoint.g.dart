@@ -37,6 +37,9 @@ _$NavigationEndpointImpl _$$NavigationEndpointImplFromJson(
           ? null
           : FeedbackEndpoint.fromJson(
               json['feedbackEndpoint'] as Map<String, dynamic>),
+      urlEndpoint: json['urlEndpoint'] == null
+          ? null
+          : UrlEndpoint.fromJson(json['urlEndpoint'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$NavigationEndpointImplToJson(
@@ -49,4 +52,5 @@ Map<String, dynamic> _$$NavigationEndpointImplToJson(
       'queueAddEndpoint': instance.queueAddEndpoint,
       'shareEntityEndpoint': instance.shareEntityEndpoint,
       'feedbackEndpoint': instance.feedbackEndpoint,
+      'urlEndpoint': instance.urlEndpoint,
     };

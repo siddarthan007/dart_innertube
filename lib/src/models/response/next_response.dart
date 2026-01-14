@@ -3,6 +3,7 @@ import '../tabs.dart';
 import '../navigation_endpoint.dart';
 import '../playlist_panel_renderer.dart';
 import '../music_responsive_list_item_renderer.dart';
+import '../youtube_data_page.dart';
 
 part 'next_response.freezed.dart';
 part 'next_response.g.dart';
@@ -61,19 +62,6 @@ class WatchNextTabbedResultsRenderer with _$WatchNextTabbedResultsRenderer {
 
   factory WatchNextTabbedResultsRenderer.fromJson(Map<String, dynamic> json) =>
       _$WatchNextTabbedResultsRendererFromJson(json);
-}
-
-@freezed
-class TwoColumnWatchNextResults with _$TwoColumnWatchNextResults {
-  const factory TwoColumnWatchNextResults({
-    required List<Tab> tabs,
-    SecondaryResults? secondaryResults,
-    PlaylistPanelRenderer? playlist,
-    // Autoplay? autoplay, // Add if needed logic wise, usually strictly handled by client state
-  }) = _TwoColumnWatchNextResults;
-
-  factory TwoColumnWatchNextResults.fromJson(Map<String, dynamic> json) =>
-      _$TwoColumnWatchNextResultsFromJson(json);
 }
 
 @freezed

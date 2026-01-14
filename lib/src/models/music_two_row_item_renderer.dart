@@ -26,7 +26,7 @@ class MusicTwoRowItemRenderer with _$MusicTwoRowItemRenderer {
   factory MusicTwoRowItemRenderer.fromJson(Map<String, dynamic> json) =>
       _$MusicTwoRowItemRendererFromJson(json);
 
-  bool get isSong => navigationEndpoint.watchEndpoint != null;
+  bool get isSong => navigationEndpoint.endpoint is WatchEndpoint;
 
   bool get isPlaylist =>
       navigationEndpoint.browseEndpoint?.browseEndpointContextSupportedConfigs

@@ -53,12 +53,13 @@ Map<String, dynamic> _$$MusicResponsiveListItemRendererImplToJson(
 
 _$FlexColumnImpl _$$FlexColumnImplFromJson(Map<String, dynamic> json) =>
     _$FlexColumnImpl(
-      musicResponsiveListItemFlexColumnRenderer:
-          json['musicResponsiveListItemFlexColumnRenderer'] == null
-              ? null
-              : MusicResponsiveListItemFlexColumnRenderer.fromJson(
-                  json['musicResponsiveListItemFlexColumnRenderer']
-                      as Map<String, dynamic>),
+      musicResponsiveListItemFlexColumnRenderer: _readFlexColumn(
+                  json, 'musicResponsiveListItemFlexColumnRenderer') ==
+              null
+          ? null
+          : MusicResponsiveListItemFlexColumnRenderer.fromJson(
+              _readFlexColumn(json, 'musicResponsiveListItemFlexColumnRenderer')
+                  as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$FlexColumnImplToJson(_$FlexColumnImpl instance) =>

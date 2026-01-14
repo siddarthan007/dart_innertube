@@ -113,6 +113,9 @@ _$FormatImpl _$$FormatImplFromJson(Map<String, dynamic> json) => _$FormatImpl(
       loudnessDb: _doubleFromDynamic(json['loudnessDb']),
       lastModified: json['lastModified'],
       signatureCipher: json['signatureCipher'] as String?,
+      audioTrack: json['audioTrack'] == null
+          ? null
+          : AudioTrack.fromJson(json['audioTrack'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$FormatImplToJson(_$FormatImpl instance) =>
@@ -135,6 +138,21 @@ Map<String, dynamic> _$$FormatImplToJson(_$FormatImpl instance) =>
       'loudnessDb': instance.loudnessDb,
       'lastModified': instance.lastModified,
       'signatureCipher': instance.signatureCipher,
+      'audioTrack': instance.audioTrack,
+    };
+
+_$AudioTrackImpl _$$AudioTrackImplFromJson(Map<String, dynamic> json) =>
+    _$AudioTrackImpl(
+      displayName: json['displayName'] as String?,
+      id: json['id'] as String?,
+      isAutoDubbed: json['isAutoDubbed'] as bool?,
+    );
+
+Map<String, dynamic> _$$AudioTrackImplToJson(_$AudioTrackImpl instance) =>
+    <String, dynamic>{
+      'displayName': instance.displayName,
+      'id': instance.id,
+      'isAutoDubbed': instance.isAutoDubbed,
     };
 
 _$VideoDetailsImpl _$$VideoDetailsImplFromJson(Map<String, dynamic> json) =>

@@ -92,12 +92,27 @@ class Format with _$Format {
     @JsonKey(fromJson: _doubleFromDynamic) double? loudnessDb,
     dynamic lastModified,
     String? signatureCipher,
-    // audioTrack?
+    AudioTrack? audioTrack,
   }) = _Format;
 
   factory Format.fromJson(Map<String, dynamic> json) => _$FormatFromJson(json);
 
   bool get isAudio => width == null;
+  
+  /// Returns true if the audio track is the original (not auto-dubbed)
+  bool get isOriginal => audioTrack?.isAutoDubbed == null;
+}
+
+@freezed
+class AudioTrack with _$AudioTrack {
+  const factory AudioTrack({
+    String? displayName,
+    String? id,
+    bool? isAutoDubbed,
+  }) = _AudioTrack;
+
+  factory AudioTrack.fromJson(Map<String, dynamic> json) =>
+      _$AudioTrackFromJson(json);
 }
 
 int? _intFromDynamic(dynamic value) {

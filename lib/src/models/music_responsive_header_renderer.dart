@@ -3,7 +3,7 @@ import 'runs.dart';
 import 'thumbnail_renderer.dart';
 import 'menu.dart';
 import 'navigation_endpoint.dart';
-import 'subscribe_button_renderer.dart';
+import 'subscription_button.dart';
 import 'toggle_button_renderer.dart';
 
 part 'music_responsive_header_renderer.freezed.dart';

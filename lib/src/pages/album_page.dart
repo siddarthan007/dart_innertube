@@ -66,16 +66,18 @@ class AlbumPage {
   }
 
   static String? getPlaylistId(BrowseResponse response) {
-    // Note: Dart doesn't have substringAfterLast efficiently built-in on String? nullable without check
-    // Assuming non-null response structure or safe access
     var playlistId = response.microformat?.microformatDataRenderer?.urlCanonical
         ?.split('=')
         .lastOrNull;
+
     if (playlistId == null) {
-      // access deep nested path safely?
-      // response.header?.musicDetailHeaderRenderer?.menu.menuRenderer.topLevelButtons...
-      // For now, implementing safe access logic is tedious without strict model generated code being perfect.
-      // Relying on basic paths.
+      final detailHeader = response.header?.musicDetailHeaderRenderer;
+      if (detailHeader != null) {
+        final button =
+            detailHeader.menu.menuRenderer.topLevelButtons?.firstOrNull;
+        playlistId = button?.buttonRenderer?.navigationEndpoint
+            .watchPlaylistEndpoint?.playlistId;
+      }
     }
     return playlistId;
   }

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'endpoint.dart';
+import 'url_endpoint.dart';
 
 part 'navigation_endpoint.freezed.dart';
 part 'navigation_endpoint.g.dart';
@@ -16,6 +17,7 @@ class NavigationEndpoint with _$NavigationEndpoint {
     QueueAddEndpoint? queueAddEndpoint,
     ShareEntityEndpoint? shareEntityEndpoint,
     FeedbackEndpoint? feedbackEndpoint,
+    UrlEndpoint? urlEndpoint,
   }) = _NavigationEndpoint;
 
   factory NavigationEndpoint.fromJson(Map<String, dynamic> json) =>

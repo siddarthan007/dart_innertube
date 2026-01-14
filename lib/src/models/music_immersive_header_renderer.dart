@@ -2,7 +2,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'runs.dart';
 import 'thumbnail_renderer.dart';
 import 'menu.dart';
-// import 'endpoint.dart';
+import 'button.dart';
+import 'subscription_button.dart';
 
 part 'music_immersive_header_renderer.freezed.dart';
 part 'music_immersive_header_renderer.g.dart';
@@ -12,10 +13,13 @@ class MusicImmersiveHeaderRenderer with _$MusicImmersiveHeaderRenderer {
   const factory MusicImmersiveHeaderRenderer({
     required Runs title,
     Runs? description,
-    required ThumbnailRenderer thumbnail,
-    Menu? menu,
+    ThumbnailRenderer? thumbnail,
+    Button? playButton,
+    Button? startRadioButton,
     SubscriptionButton? subscriptionButton,
-    // Add play button etc?
+    required Menu menu,
+    SubscriptionButton2? subscriptionButton2,
+    Runs? monthlyListenerCount,
   }) = _MusicImmersiveHeaderRenderer;
 
   factory MusicImmersiveHeaderRenderer.fromJson(Map<String, dynamic> json) =>
@@ -23,12 +27,21 @@ class MusicImmersiveHeaderRenderer with _$MusicImmersiveHeaderRenderer {
 }
 
 @freezed
-class SubscriptionButton with _$SubscriptionButton {
-  const factory SubscriptionButton({
-    required Map<String, dynamic>
-        subscribeButtonRenderer, // Simplify detailed SubscribeButtonRenderer for now
-  }) = _SubscriptionButton;
+class SubscriptionButton2 with _$SubscriptionButton2 {
+  const factory SubscriptionButton2({
+    SubscribeButtonRenderer2? subscribeButtonRenderer,
+  }) = _SubscriptionButton2;
 
-  factory SubscriptionButton.fromJson(Map<String, dynamic> json) =>
-      _$SubscriptionButtonFromJson(json);
+  factory SubscriptionButton2.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionButton2FromJson(json);
+}
+
+@freezed
+class SubscribeButtonRenderer2 with _$SubscribeButtonRenderer2 {
+  const factory SubscribeButtonRenderer2({
+    Runs? subscriberCountWithSubscribeText,
+  }) = _SubscribeButtonRenderer2;
+
+  factory SubscribeButtonRenderer2.fromJson(Map<String, dynamic> json) =>
+      _$SubscribeButtonRenderer2FromJson(json);
 }

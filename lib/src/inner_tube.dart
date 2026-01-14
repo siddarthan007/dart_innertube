@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'network_config.dart';
+import 'exceptions.dart';
 import 'utils/utils.dart';
 import 'models/youtube_client.dart';
 import 'models/youtube_locale.dart';
+import 'models/context.dart';
 import 'models/body/search_body.dart';
 import 'models/body/browse_body.dart';
 import 'models/body/player_body.dart';
@@ -25,20 +27,43 @@ import 'models/response/get_queue_response.dart';
 import 'models/response/create_playlist_response.dart';
 import 'models/response/feedback_response.dart';
 import 'models/response/account_menu_response.dart';
+import 'models/media_info.dart';
+import 'models/return_youtube_dislike_response.dart';
 
 class InnerTube {
-  final Dio _dio;
+  Dio _dio;
   String? _cookie;
   Map<String, String> _cookiesMap = {};
   String? visitorData;
   String? dataSyncId;
   bool useLoginForBrowse = false;
+  String? _proxy;
+  String? _proxyAuth;
 
   YouTubeLocale locale = const YouTubeLocale(gl: 'US', hl: 'en');
 
+  String? get proxy => _proxy;
+  set proxy(String? value) {
+    _proxy = value;
+    _dio = NetworkConfig.createOptimizedClient(
+        proxy: value, proxyAuth: _proxyAuth);
+  }
+
+  String? get proxyAuth => _proxyAuth;
+  set proxyAuth(String? value) {
+    _proxyAuth = value;
+    _dio = NetworkConfig.createOptimizedClient(proxy: _proxy, proxyAuth: value);
+  }
+
   InnerTube({
     Dio? dio,
-  }) : _dio = dio ?? NetworkConfig.createOptimizedClient();
+    String? proxy,
+    String? proxyAuth,
+  })  : _dio = dio ??
+            NetworkConfig.createOptimizedClient(
+                proxy: proxy, proxyAuth: proxyAuth),
+        _proxy = proxy,
+        _proxyAuth = proxyAuth;
 
   String? get cookie => _cookie;
 
@@ -85,9 +110,9 @@ class InnerTube {
       }
     }
 
-    if (visitorData != null) {
-      headers['X-Goog-Visitor-Id'] = visitorData!;
-    }
+    // if (visitorData != null) {
+    //   headers['X-Goog-Visitor-Id'] = visitorData!;
+    // }
 
     return headers;
   }
@@ -101,8 +126,12 @@ class InnerTube {
     String? continuation,
     String? ctoken,
   }) async {
-    var url =
-        '${YouTubeClient.apiUrlYoutubeMusic}$endpoint?prettyPrint=false';
+    var url = '${YouTubeClient.apiUrlYoutubeMusic}$endpoint';
+    if (!url.contains('?')) {
+      url += '?prettyPrint=false';
+    } else {
+      url += '&prettyPrint=false';
+    }
 
     if (continuation != null) {
       url += '&continuation=$continuation&ctoken=$continuation';
@@ -110,14 +139,23 @@ class InnerTube {
 
     final headers = await _headers(client, setLogin: setLogin);
 
+    // Remove nulls to match Kotlin's explicitNulls = false behavior
+    final cleanedBody = _removeNulls(bodyJson);
+
     try {
       final response = await _dio.post(
         url,
-        data: bodyJson,
+        data: cleanedBody,
         options: Options(headers: headers, responseType: ResponseType.json),
       );
 
-      final data = response.data as Map<String, dynamic>;
+      final responseData = response.data;
+      if (responseData == null) throw Exception('Response data is null');
+      if (responseData is! Map) {
+        throw Exception(
+            'Response data is not a Map: ${responseData.runtimeType}');
+      }
+      final data = responseData.cast<String, dynamic>();
 
       // Update visitor data if present in response context
       if (data.containsKey('responseContext')) {
@@ -128,8 +166,15 @@ class InnerTube {
       }
 
       return fromJson(data);
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        throw NotFoundException('Resource not found', e);
+      } else if (e.response?.statusCode == 403) {
+        throw PermissionDeniedException('Access denied', e);
+      }
+      throw InnerTubeException('InnerTube Request Failed: ${e.message}', e);
     } catch (e) {
-      throw Exception('InnerTube Request Failed: $e');
+      throw InnerTubeException('InnerTube Request Failed: $e', e);
     }
   }
 
@@ -195,10 +240,31 @@ class InnerTube {
     String? playlistId,
     int? signatureTimestamp,
   }) async {
+    // Build context with thirdParty for embedded clients (matching Kotlin)
+    Context context = client.toContext(locale, visitorData, dataSyncId);
+    if (client.isEmbedded) {
+      context = context.copyWith(
+        thirdParty: ContextThirdParty(
+          embedUrl: 'https://www.youtube.com/watch?v=$videoId',
+        ),
+      );
+    }
+
+    // Build playbackContext if client uses signature timestamp (matching Kotlin)
+    PlaybackContext? playbackContext;
+    if (client.useSignatureTimestamp && signatureTimestamp != null) {
+      playbackContext = PlaybackContext(
+        contentPlaybackContext: ContentPlaybackContext(
+          signatureTimestamp: signatureTimestamp,
+        ),
+      );
+    }
+
     final body = PlayerBody(
-      context: client.toContext(locale, visitorData, dataSyncId),
+      context: context,
       videoId: videoId,
       playlistId: playlistId,
+      playbackContext: playbackContext,
     );
 
     return _post<PlayerResponse>(
@@ -208,6 +274,28 @@ class InnerTube {
       (json) => PlayerResponse.fromJson(json),
       setLogin: true,
     );
+  }
+
+  /// Recursively removes null values from a map to match Kotlin's explicitNulls = false behavior
+  Map<String, dynamic> _removeNulls(Map<String, dynamic> map) {
+    final result = <String, dynamic>{};
+    for (final entry in map.entries) {
+      if (entry.value != null) {
+        if (entry.value is Map<String, dynamic>) {
+          result[entry.key] = _removeNulls(entry.value as Map<String, dynamic>);
+        } else if (entry.value is List) {
+          result[entry.key] = (entry.value as List).map((item) {
+            if (item is Map<String, dynamic>) {
+              return _removeNulls(item);
+            }
+            return item;
+          }).toList();
+        } else {
+          result[entry.key] = entry.value;
+        }
+      }
+    }
+    return result;
   }
 
   // ===== Next =====
@@ -289,7 +377,7 @@ class InnerTube {
     );
 
     return _post<Map<String, dynamic>>(
-      'get_transcript',
+      'get_transcript?key=AIzaSyC9XL3ZjWddXya6X74dJoCTL-WEYFDNX3',
       client,
       body.toJson(),
       (json) => json,
@@ -599,5 +687,221 @@ class InnerTube {
       (json) => FeedbackResponse.fromJson(json),
       setLogin: true,
     );
+  }
+
+  // ===== Register Playback =====
+  Future<void> registerPlayback(
+    String url,
+    String cpn,
+    YouTubeClient client, {
+    String? playlistId,
+  }) async {
+    final headers = await _headers(client, setLogin: true);
+    final queryParams = <String, dynamic>{
+      'ver': '2',
+      'c': client.clientName,
+      'cpn': cpn,
+    };
+
+    if (playlistId != null) {
+      queryParams['list'] = playlistId;
+      queryParams['referrer'] =
+          'https://music.youtube.com/playlist?list=$playlistId';
+    }
+
+    final queryString = queryParams.entries
+        .map((e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}')
+        .join('&');
+    final fullUrl = '$url${url.contains('?') ? '&' : '?'}$queryString';
+
+    try {
+      await _dio.get(
+        fullUrl,
+        options: Options(headers: headers),
+      );
+    } catch (e) {
+      throw Exception('Register Playback Failed: $e');
+    }
+  }
+
+  // ===== Get SW.js Data (for visitor data) =====
+  Future<String> getSwJsData() async {
+    try {
+      final response = await _dio.get(
+        'https://music.youtube.com/sw.js_data',
+        options: Options(responseType: ResponseType.plain),
+      );
+      return response.data as String;
+    } catch (e) {
+      throw Exception('Get SW.js Data Failed: $e');
+    }
+  }
+
+  // ===== Get Upload Custom Thumbnail Link =====
+  Future<Map<String, dynamic>> getUploadCustomThumbnailLink(
+    YouTubeClient client,
+    int contentLength,
+  ) async {
+    final headers = await _headers(client, setLogin: true);
+    headers['X-Goog-Upload-Command'] = 'start';
+    headers['X-Goog-Upload-Protocol'] = 'resumable';
+    headers['X-Goog-Upload-Header-Content-Length'] = contentLength.toString();
+
+    try {
+      final response = await _dio.post(
+        'https://music.youtube.com/playlist_image_upload/playlist_custom_thumbnail',
+        options: Options(headers: headers),
+      );
+      return response.headers.map;
+    } catch (e) {
+      throw Exception('Get Upload Custom Thumbnail Link Failed: $e');
+    }
+  }
+
+  // ===== Upload Custom Thumbnail =====
+  Future<String> uploadCustomThumbnail(
+    YouTubeClient client,
+    String uploadId,
+    List<int> imageBytes,
+  ) async {
+    final headers = await _headers(client, setLogin: true);
+    headers['X-Goog-Upload-Command'] = 'upload, finalize';
+    headers['X-Goog-Upload-Offset'] = '0';
+
+    try {
+      final response = await _dio.post(
+        'https://music.youtube.com/playlist_image_upload/playlist_custom_thumbnail?upload_id=$uploadId&upload_protocol=resumable',
+        data: imageBytes,
+        options: Options(
+          headers: headers,
+          contentType: 'application/octet-stream',
+        ),
+      );
+      final data = response.data as Map<String, dynamic>;
+      return data['encryptedBlobId'] as String;
+    } catch (e) {
+      throw Exception('Upload Custom Thumbnail Failed: $e');
+    }
+  }
+
+  // ===== Set Thumbnail Playlist =====
+  Future<Map<String, dynamic>> setThumbnailPlaylist(
+    YouTubeClient client,
+    String playlistId,
+    String blobId,
+  ) async {
+    final body = EditPlaylistBody(
+      context: client.toContext(locale, visitorData, dataSyncId),
+      playlistId: playlistId,
+      actions: [
+        PlaylistAction(
+          action: 'ACTION_SET_CUSTOM_THUMBNAIL',
+          addedCustomThumbnail: PlaylistActionCustomThumbnail(
+            playlistScottyEncryptedBlobId: blobId,
+          ),
+        )
+      ],
+    );
+
+    return _post<Map<String, dynamic>>(
+      'browse/edit_playlist',
+      client,
+      body.toJson(),
+      (json) => json,
+      setLogin: true,
+    );
+  }
+
+  // ===== Remove Thumbnail Playlist =====
+  Future<Map<String, dynamic>> removeThumbnailPlaylist(
+    YouTubeClient client,
+    String playlistId,
+  ) async {
+    final body = EditPlaylistBody(
+      context: client.toContext(locale, visitorData, dataSyncId),
+      playlistId: playlistId,
+      actions: [
+        PlaylistAction(
+          action: 'ACTION_REMOVE_CUSTOM_THUMBNAIL',
+          deletedCustomThumbnail: PlaylistActionDeletedThumbnail(),
+        )
+      ],
+    );
+
+    return _post<Map<String, dynamic>>(
+      'browse/edit_playlist',
+      client,
+      body.toJson(),
+      (json) => json,
+      setLogin: true,
+    );
+  }
+
+  // ===== Return YouTube Dislike =====
+  Future<ReturnYouTubeDislikeResponse> returnYouTubeDislike(
+      String videoId) async {
+    try {
+      final response = await _dio.get(
+        'https://returnyoutubedislikeapi.com/Votes?videoId=$videoId',
+        options: Options(
+          headers: {'Content-Type': 'application/json'},
+        ),
+      );
+      return ReturnYouTubeDislikeResponse.fromJson(
+          response.data as Map<String, dynamic>);
+    } catch (e) {
+      throw Exception('Return YouTube Dislike Failed: $e');
+    }
+  }
+
+  // ===== Get Media Info =====
+  Future<MediaInfo> getMediaInfo(String videoId) async {
+    try {
+      // Call next with WEB client to get video info
+      final nextResponse = await next(
+        YouTubeClient.web,
+        videoId: videoId,
+      );
+
+      final contentList = nextResponse
+          .contents.twoColumnWatchNextResults?.results?.results?.content;
+
+      final baseForInfo = contentList
+          ?.map((e) => e?.videoSecondaryInfoRenderer)
+          .where((e) => e != null)
+          .firstOrNull;
+
+      final baseForTitle = contentList
+          ?.map((e) => e?.videoPrimaryInfoRenderer)
+          .where((e) => e != null)
+          .firstOrNull;
+
+      // Get dislike data
+      final returnYouTubeDislikeResponse = await returnYouTubeDislike(videoId);
+
+      final owner = baseForInfo?.owner?.videoOwnerRenderer;
+
+      return MediaInfo(
+        videoId: videoId,
+        title: baseForTitle?.title?.runs?.firstOrNull?.text,
+        author: owner?.title?.runs?.firstOrNull?.text,
+        authorId: owner?.navigationEndpoint?.browseEndpoint?.browseId,
+        authorThumbnail: owner?.thumbnail?.thumbnails
+            ?.where((t) => t.height == 48)
+            .firstOrNull
+            ?.url
+            .replaceAll('s48', 's960'),
+        description: baseForInfo?.attributedDescription?.content,
+        subscribers:
+            owner?.subscriberCountText?.simpleText?.split(' ').firstOrNull,
+        uploadDate: baseForTitle?.dateText?.simpleText,
+        viewCount: returnYouTubeDislikeResponse.viewCount,
+        like: returnYouTubeDislikeResponse.likes,
+        dislike: returnYouTubeDislikeResponse.dislikes,
+      );
+    } catch (e) {
+      throw Exception('Get Media Info Failed: $e');
+    }
   }
 }

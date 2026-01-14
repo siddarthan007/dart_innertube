@@ -457,6 +457,7 @@ FlexColumn _$FlexColumnFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FlexColumn {
+  @JsonKey(readValue: _readFlexColumn)
   MusicResponsiveListItemFlexColumnRenderer?
       get musicResponsiveListItemFlexColumnRenderer =>
           throw _privateConstructorUsedError;
@@ -478,7 +479,8 @@ abstract class $FlexColumnCopyWith<$Res> {
       _$FlexColumnCopyWithImpl<$Res, FlexColumn>;
   @useResult
   $Res call(
-      {MusicResponsiveListItemFlexColumnRenderer?
+      {@JsonKey(readValue: _readFlexColumn)
+      MusicResponsiveListItemFlexColumnRenderer?
           musicResponsiveListItemFlexColumnRenderer});
 
   $MusicResponsiveListItemFlexColumnRendererCopyWith<$Res>?
@@ -538,7 +540,8 @@ abstract class _$$FlexColumnImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {MusicResponsiveListItemFlexColumnRenderer?
+      {@JsonKey(readValue: _readFlexColumn)
+      MusicResponsiveListItemFlexColumnRenderer?
           musicResponsiveListItemFlexColumnRenderer});
 
   @override
@@ -574,12 +577,15 @@ class __$$FlexColumnImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$FlexColumnImpl implements _FlexColumn {
-  const _$FlexColumnImpl({this.musicResponsiveListItemFlexColumnRenderer});
+  const _$FlexColumnImpl(
+      {@JsonKey(readValue: _readFlexColumn)
+      this.musicResponsiveListItemFlexColumnRenderer});
 
   factory _$FlexColumnImpl.fromJson(Map<String, dynamic> json) =>
       _$$FlexColumnImplFromJson(json);
 
   @override
+  @JsonKey(readValue: _readFlexColumn)
   final MusicResponsiveListItemFlexColumnRenderer?
       musicResponsiveListItemFlexColumnRenderer;
 
@@ -622,13 +628,15 @@ class _$FlexColumnImpl implements _FlexColumn {
 
 abstract class _FlexColumn implements FlexColumn {
   const factory _FlexColumn(
-      {final MusicResponsiveListItemFlexColumnRenderer?
+      {@JsonKey(readValue: _readFlexColumn)
+      final MusicResponsiveListItemFlexColumnRenderer?
           musicResponsiveListItemFlexColumnRenderer}) = _$FlexColumnImpl;
 
   factory _FlexColumn.fromJson(Map<String, dynamic> json) =
       _$FlexColumnImpl.fromJson;
 
   @override
+  @JsonKey(readValue: _readFlexColumn)
   MusicResponsiveListItemFlexColumnRenderer?
       get musicResponsiveListItemFlexColumnRenderer;
 

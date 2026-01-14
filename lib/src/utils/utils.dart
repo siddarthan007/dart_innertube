@@ -49,3 +49,19 @@ class Utils {
     return base64.encode(utf8.encode(input));
   }
 }
+
+// Extension for nullable let
+extension NullableExtension<T> on T? {
+  R? let<R>(R Function(T) f) {
+    // ignore: unnecessary_this
+    final self = this;
+    return self != null ? f(self) : null;
+  }
+}
+
+extension DistinctBy<E> on Iterable<E> {
+  Iterable<E> distinctBy<Id>(Id Function(E element) getId) {
+    final ids = <Id>{};
+    return where((element) => ids.add(getId(element)));
+  }
+}

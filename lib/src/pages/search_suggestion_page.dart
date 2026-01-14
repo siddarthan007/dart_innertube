@@ -9,8 +9,13 @@ class SearchSuggestionPage {
       final videoId = renderer.playlistItemData?.videoId;
       if (videoId == null) return null;
 
-      final title = renderer.flexColumns.firstOrNull
-          ?.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.firstOrNull
+      final title = renderer
+          .flexColumns
+          .firstOrNull
+          ?.musicResponsiveListItemFlexColumnRenderer
+          ?.text
+          ?.runs
+          ?.firstOrNull
           ?.text;
       if (title == null) return null;
 
@@ -67,8 +72,13 @@ class SearchSuggestionPage {
       final browseId = renderer.navigationEndpoint?.browseEndpoint?.browseId;
       if (browseId == null) return null;
 
-      final title = renderer.flexColumns.firstOrNull
-          ?.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.firstOrNull
+      final title = renderer
+          .flexColumns
+          .firstOrNull
+          ?.musicResponsiveListItemFlexColumnRenderer
+          ?.text
+          ?.runs
+          ?.firstOrNull
           ?.text;
       if (title == null) return null;
 
@@ -96,8 +106,13 @@ class SearchSuggestionPage {
           ?.playlistId;
       if (playlistId == null) return null;
 
-      final title = renderer.flexColumns.firstOrNull
-          ?.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.firstOrNull
+      final title = renderer
+          .flexColumns
+          .firstOrNull
+          ?.musicResponsiveListItemFlexColumnRenderer
+          ?.text
+          ?.runs
+          ?.firstOrNull
           ?.text;
       if (title == null) return null;
 

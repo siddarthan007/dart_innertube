@@ -10,6 +10,11 @@ import 'endpoint.dart';
 part 'music_responsive_list_item_renderer.freezed.dart';
 part 'music_responsive_list_item_renderer.g.dart';
 
+Object? _readFlexColumn(Map map, String key) {
+  return map['musicResponsiveListItemFlexColumnRenderer'] ??
+      map['musicResponsiveListItemFixedColumnRenderer'];
+}
+
 @freezed
 class MusicResponsiveListItemRenderer with _$MusicResponsiveListItemRenderer {
   const MusicResponsiveListItemRenderer._();
@@ -66,6 +71,7 @@ class MusicResponsiveListItemRenderer with _$MusicResponsiveListItemRenderer {
 @freezed
 class FlexColumn with _$FlexColumn {
   const factory FlexColumn({
+    @JsonKey(readValue: _readFlexColumn)
     MusicResponsiveListItemFlexColumnRenderer?
         musicResponsiveListItemFlexColumnRenderer,
   }) = _FlexColumn;

@@ -19,6 +19,10 @@ _$BrowseResponseImpl _$$BrowseResponseImplFromJson(Map<String, dynamic> json) =>
           ? null
           : BrowseContinuationContents.fromJson(
               json['continuationContents'] as Map<String, dynamic>),
+      onResponseReceivedActions:
+          (json['onResponseReceivedActions'] as List<dynamic>?)
+              ?.map((e) => ResponseAction.fromJson(e as Map<String, dynamic>))
+              .toList(),
       background: json['background'] == null
           ? null
           : ThumbnailRenderer.fromJson(
@@ -37,6 +41,7 @@ Map<String, dynamic> _$$BrowseResponseImplToJson(
       'responseContext': instance.responseContext,
       'contents': instance.contents,
       'continuationContents': instance.continuationContents,
+      'onResponseReceivedActions': instance.onResponseReceivedActions,
       'background': instance.background,
       'header': instance.header,
       'microformat': instance.microformat,
@@ -253,4 +258,48 @@ Map<String, dynamic> _$$MicroformatDataRendererImplToJson(
         _$MicroformatDataRendererImpl instance) =>
     <String, dynamic>{
       'urlCanonical': instance.urlCanonical,
+    };
+
+_$ResponseActionImpl _$$ResponseActionImplFromJson(Map<String, dynamic> json) =>
+    _$ResponseActionImpl(
+      appendContinuationItemsAction: json['appendContinuationItemsAction'] ==
+              null
+          ? null
+          : AppendContinuationItemsAction.fromJson(
+              json['appendContinuationItemsAction'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$ResponseActionImplToJson(
+        _$ResponseActionImpl instance) =>
+    <String, dynamic>{
+      'appendContinuationItemsAction': instance.appendContinuationItemsAction,
+    };
+
+_$AppendContinuationItemsActionImpl
+    _$$AppendContinuationItemsActionImplFromJson(Map<String, dynamic> json) =>
+        _$AppendContinuationItemsActionImpl(
+          continuationItems: json['continuationItems'] == null
+              ? null
+              : ContinuationItems.fromJson(
+                  json['continuationItems'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$$AppendContinuationItemsActionImplToJson(
+        _$AppendContinuationItemsActionImpl instance) =>
+    <String, dynamic>{
+      'continuationItems': instance.continuationItems,
+    };
+
+_$ContinuationItemsImpl _$$ContinuationItemsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ContinuationItemsImpl(
+      continuationItems: (json['continuationItems'] as List<dynamic>?)
+          ?.map((e) => MusicShelfContent.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$ContinuationItemsImplToJson(
+        _$ContinuationItemsImpl instance) =>
+    <String, dynamic>{
+      'continuationItems': instance.continuationItems,
     };

@@ -24,6 +24,8 @@ mixin _$BrowseResponse {
   BrowseContents? get contents => throw _privateConstructorUsedError;
   BrowseContinuationContents? get continuationContents =>
       throw _privateConstructorUsedError;
+  List<ResponseAction>? get onResponseReceivedActions =>
+      throw _privateConstructorUsedError;
   ThumbnailRenderer? get background => throw _privateConstructorUsedError;
   BrowseHeader? get header => throw _privateConstructorUsedError;
   Microformat? get microformat => throw _privateConstructorUsedError;
@@ -48,6 +50,7 @@ abstract class $BrowseResponseCopyWith<$Res> {
       {ResponseContext? responseContext,
       BrowseContents? contents,
       BrowseContinuationContents? continuationContents,
+      List<ResponseAction>? onResponseReceivedActions,
       ThumbnailRenderer? background,
       BrowseHeader? header,
       Microformat? microformat});
@@ -78,6 +81,7 @@ class _$BrowseResponseCopyWithImpl<$Res, $Val extends BrowseResponse>
     Object? responseContext = freezed,
     Object? contents = freezed,
     Object? continuationContents = freezed,
+    Object? onResponseReceivedActions = freezed,
     Object? background = freezed,
     Object? header = freezed,
     Object? microformat = freezed,
@@ -95,6 +99,10 @@ class _$BrowseResponseCopyWithImpl<$Res, $Val extends BrowseResponse>
           ? _value.continuationContents
           : continuationContents // ignore: cast_nullable_to_non_nullable
               as BrowseContinuationContents?,
+      onResponseReceivedActions: freezed == onResponseReceivedActions
+          ? _value.onResponseReceivedActions
+          : onResponseReceivedActions // ignore: cast_nullable_to_non_nullable
+              as List<ResponseAction>?,
       background: freezed == background
           ? _value.background
           : background // ignore: cast_nullable_to_non_nullable
@@ -208,6 +216,7 @@ abstract class _$$BrowseResponseImplCopyWith<$Res>
       {ResponseContext? responseContext,
       BrowseContents? contents,
       BrowseContinuationContents? continuationContents,
+      List<ResponseAction>? onResponseReceivedActions,
       ThumbnailRenderer? background,
       BrowseHeader? header,
       Microformat? microformat});
@@ -242,6 +251,7 @@ class __$$BrowseResponseImplCopyWithImpl<$Res>
     Object? responseContext = freezed,
     Object? contents = freezed,
     Object? continuationContents = freezed,
+    Object? onResponseReceivedActions = freezed,
     Object? background = freezed,
     Object? header = freezed,
     Object? microformat = freezed,
@@ -259,6 +269,10 @@ class __$$BrowseResponseImplCopyWithImpl<$Res>
           ? _value.continuationContents
           : continuationContents // ignore: cast_nullable_to_non_nullable
               as BrowseContinuationContents?,
+      onResponseReceivedActions: freezed == onResponseReceivedActions
+          ? _value._onResponseReceivedActions
+          : onResponseReceivedActions // ignore: cast_nullable_to_non_nullable
+              as List<ResponseAction>?,
       background: freezed == background
           ? _value.background
           : background // ignore: cast_nullable_to_non_nullable
@@ -282,9 +296,11 @@ class _$BrowseResponseImpl implements _BrowseResponse {
       {this.responseContext,
       this.contents,
       this.continuationContents,
+      final List<ResponseAction>? onResponseReceivedActions,
       this.background,
       this.header,
-      this.microformat});
+      this.microformat})
+      : _onResponseReceivedActions = onResponseReceivedActions;
 
   factory _$BrowseResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$BrowseResponseImplFromJson(json);
@@ -295,6 +311,17 @@ class _$BrowseResponseImpl implements _BrowseResponse {
   final BrowseContents? contents;
   @override
   final BrowseContinuationContents? continuationContents;
+  final List<ResponseAction>? _onResponseReceivedActions;
+  @override
+  List<ResponseAction>? get onResponseReceivedActions {
+    final value = _onResponseReceivedActions;
+    if (value == null) return null;
+    if (_onResponseReceivedActions is EqualUnmodifiableListView)
+      return _onResponseReceivedActions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final ThumbnailRenderer? background;
   @override
@@ -304,7 +331,7 @@ class _$BrowseResponseImpl implements _BrowseResponse {
 
   @override
   String toString() {
-    return 'BrowseResponse(responseContext: $responseContext, contents: $contents, continuationContents: $continuationContents, background: $background, header: $header, microformat: $microformat)';
+    return 'BrowseResponse(responseContext: $responseContext, contents: $contents, continuationContents: $continuationContents, onResponseReceivedActions: $onResponseReceivedActions, background: $background, header: $header, microformat: $microformat)';
   }
 
   @override
@@ -318,6 +345,8 @@ class _$BrowseResponseImpl implements _BrowseResponse {
                 other.contents == contents) &&
             (identical(other.continuationContents, continuationContents) ||
                 other.continuationContents == continuationContents) &&
+            const DeepCollectionEquality().equals(
+                other._onResponseReceivedActions, _onResponseReceivedActions) &&
             (identical(other.background, background) ||
                 other.background == background) &&
             (identical(other.header, header) || other.header == header) &&
@@ -327,8 +356,15 @@ class _$BrowseResponseImpl implements _BrowseResponse {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, responseContext, contents,
-      continuationContents, background, header, microformat);
+  int get hashCode => Object.hash(
+      runtimeType,
+      responseContext,
+      contents,
+      continuationContents,
+      const DeepCollectionEquality().hash(_onResponseReceivedActions),
+      background,
+      header,
+      microformat);
 
   /// Create a copy of BrowseResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -352,6 +388,7 @@ abstract class _BrowseResponse implements BrowseResponse {
       {final ResponseContext? responseContext,
       final BrowseContents? contents,
       final BrowseContinuationContents? continuationContents,
+      final List<ResponseAction>? onResponseReceivedActions,
       final ThumbnailRenderer? background,
       final BrowseHeader? header,
       final Microformat? microformat}) = _$BrowseResponseImpl;
@@ -365,6 +402,8 @@ abstract class _BrowseResponse implements BrowseResponse {
   BrowseContents? get contents;
   @override
   BrowseContinuationContents? get continuationContents;
+  @override
+  List<ResponseAction>? get onResponseReceivedActions;
   @override
   ThumbnailRenderer? get background;
   @override
@@ -2679,4 +2718,534 @@ abstract class _MicroformatDataRenderer implements MicroformatDataRenderer {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MicroformatDataRendererImplCopyWith<_$MicroformatDataRendererImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+ResponseAction _$ResponseActionFromJson(Map<String, dynamic> json) {
+  return _ResponseAction.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ResponseAction {
+  AppendContinuationItemsAction? get appendContinuationItemsAction =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this ResponseAction to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of ResponseAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ResponseActionCopyWith<ResponseAction> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ResponseActionCopyWith<$Res> {
+  factory $ResponseActionCopyWith(
+          ResponseAction value, $Res Function(ResponseAction) then) =
+      _$ResponseActionCopyWithImpl<$Res, ResponseAction>;
+  @useResult
+  $Res call({AppendContinuationItemsAction? appendContinuationItemsAction});
+
+  $AppendContinuationItemsActionCopyWith<$Res>?
+      get appendContinuationItemsAction;
+}
+
+/// @nodoc
+class _$ResponseActionCopyWithImpl<$Res, $Val extends ResponseAction>
+    implements $ResponseActionCopyWith<$Res> {
+  _$ResponseActionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ResponseAction
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? appendContinuationItemsAction = freezed,
+  }) {
+    return _then(_value.copyWith(
+      appendContinuationItemsAction: freezed == appendContinuationItemsAction
+          ? _value.appendContinuationItemsAction
+          : appendContinuationItemsAction // ignore: cast_nullable_to_non_nullable
+              as AppendContinuationItemsAction?,
+    ) as $Val);
+  }
+
+  /// Create a copy of ResponseAction
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AppendContinuationItemsActionCopyWith<$Res>?
+      get appendContinuationItemsAction {
+    if (_value.appendContinuationItemsAction == null) {
+      return null;
+    }
+
+    return $AppendContinuationItemsActionCopyWith<$Res>(
+        _value.appendContinuationItemsAction!, (value) {
+      return _then(
+          _value.copyWith(appendContinuationItemsAction: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ResponseActionImplCopyWith<$Res>
+    implements $ResponseActionCopyWith<$Res> {
+  factory _$$ResponseActionImplCopyWith(_$ResponseActionImpl value,
+          $Res Function(_$ResponseActionImpl) then) =
+      __$$ResponseActionImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({AppendContinuationItemsAction? appendContinuationItemsAction});
+
+  @override
+  $AppendContinuationItemsActionCopyWith<$Res>?
+      get appendContinuationItemsAction;
+}
+
+/// @nodoc
+class __$$ResponseActionImplCopyWithImpl<$Res>
+    extends _$ResponseActionCopyWithImpl<$Res, _$ResponseActionImpl>
+    implements _$$ResponseActionImplCopyWith<$Res> {
+  __$$ResponseActionImplCopyWithImpl(
+      _$ResponseActionImpl _value, $Res Function(_$ResponseActionImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ResponseAction
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? appendContinuationItemsAction = freezed,
+  }) {
+    return _then(_$ResponseActionImpl(
+      appendContinuationItemsAction: freezed == appendContinuationItemsAction
+          ? _value.appendContinuationItemsAction
+          : appendContinuationItemsAction // ignore: cast_nullable_to_non_nullable
+              as AppendContinuationItemsAction?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ResponseActionImpl implements _ResponseAction {
+  const _$ResponseActionImpl({this.appendContinuationItemsAction});
+
+  factory _$ResponseActionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ResponseActionImplFromJson(json);
+
+  @override
+  final AppendContinuationItemsAction? appendContinuationItemsAction;
+
+  @override
+  String toString() {
+    return 'ResponseAction(appendContinuationItemsAction: $appendContinuationItemsAction)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ResponseActionImpl &&
+            (identical(other.appendContinuationItemsAction,
+                    appendContinuationItemsAction) ||
+                other.appendContinuationItemsAction ==
+                    appendContinuationItemsAction));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, appendContinuationItemsAction);
+
+  /// Create a copy of ResponseAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ResponseActionImplCopyWith<_$ResponseActionImpl> get copyWith =>
+      __$$ResponseActionImplCopyWithImpl<_$ResponseActionImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ResponseActionImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ResponseAction implements ResponseAction {
+  const factory _ResponseAction(
+      {final AppendContinuationItemsAction?
+          appendContinuationItemsAction}) = _$ResponseActionImpl;
+
+  factory _ResponseAction.fromJson(Map<String, dynamic> json) =
+      _$ResponseActionImpl.fromJson;
+
+  @override
+  AppendContinuationItemsAction? get appendContinuationItemsAction;
+
+  /// Create a copy of ResponseAction
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ResponseActionImplCopyWith<_$ResponseActionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+AppendContinuationItemsAction _$AppendContinuationItemsActionFromJson(
+    Map<String, dynamic> json) {
+  return _AppendContinuationItemsAction.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AppendContinuationItemsAction {
+  ContinuationItems? get continuationItems =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this AppendContinuationItemsAction to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of AppendContinuationItemsAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $AppendContinuationItemsActionCopyWith<AppendContinuationItemsAction>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AppendContinuationItemsActionCopyWith<$Res> {
+  factory $AppendContinuationItemsActionCopyWith(
+          AppendContinuationItemsAction value,
+          $Res Function(AppendContinuationItemsAction) then) =
+      _$AppendContinuationItemsActionCopyWithImpl<$Res,
+          AppendContinuationItemsAction>;
+  @useResult
+  $Res call({ContinuationItems? continuationItems});
+
+  $ContinuationItemsCopyWith<$Res>? get continuationItems;
+}
+
+/// @nodoc
+class _$AppendContinuationItemsActionCopyWithImpl<$Res,
+        $Val extends AppendContinuationItemsAction>
+    implements $AppendContinuationItemsActionCopyWith<$Res> {
+  _$AppendContinuationItemsActionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of AppendContinuationItemsAction
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? continuationItems = freezed,
+  }) {
+    return _then(_value.copyWith(
+      continuationItems: freezed == continuationItems
+          ? _value.continuationItems
+          : continuationItems // ignore: cast_nullable_to_non_nullable
+              as ContinuationItems?,
+    ) as $Val);
+  }
+
+  /// Create a copy of AppendContinuationItemsAction
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ContinuationItemsCopyWith<$Res>? get continuationItems {
+    if (_value.continuationItems == null) {
+      return null;
+    }
+
+    return $ContinuationItemsCopyWith<$Res>(_value.continuationItems!, (value) {
+      return _then(_value.copyWith(continuationItems: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$AppendContinuationItemsActionImplCopyWith<$Res>
+    implements $AppendContinuationItemsActionCopyWith<$Res> {
+  factory _$$AppendContinuationItemsActionImplCopyWith(
+          _$AppendContinuationItemsActionImpl value,
+          $Res Function(_$AppendContinuationItemsActionImpl) then) =
+      __$$AppendContinuationItemsActionImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ContinuationItems? continuationItems});
+
+  @override
+  $ContinuationItemsCopyWith<$Res>? get continuationItems;
+}
+
+/// @nodoc
+class __$$AppendContinuationItemsActionImplCopyWithImpl<$Res>
+    extends _$AppendContinuationItemsActionCopyWithImpl<$Res,
+        _$AppendContinuationItemsActionImpl>
+    implements _$$AppendContinuationItemsActionImplCopyWith<$Res> {
+  __$$AppendContinuationItemsActionImplCopyWithImpl(
+      _$AppendContinuationItemsActionImpl _value,
+      $Res Function(_$AppendContinuationItemsActionImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AppendContinuationItemsAction
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? continuationItems = freezed,
+  }) {
+    return _then(_$AppendContinuationItemsActionImpl(
+      continuationItems: freezed == continuationItems
+          ? _value.continuationItems
+          : continuationItems // ignore: cast_nullable_to_non_nullable
+              as ContinuationItems?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AppendContinuationItemsActionImpl
+    implements _AppendContinuationItemsAction {
+  const _$AppendContinuationItemsActionImpl({this.continuationItems});
+
+  factory _$AppendContinuationItemsActionImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$AppendContinuationItemsActionImplFromJson(json);
+
+  @override
+  final ContinuationItems? continuationItems;
+
+  @override
+  String toString() {
+    return 'AppendContinuationItemsAction(continuationItems: $continuationItems)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AppendContinuationItemsActionImpl &&
+            (identical(other.continuationItems, continuationItems) ||
+                other.continuationItems == continuationItems));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, continuationItems);
+
+  /// Create a copy of AppendContinuationItemsAction
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AppendContinuationItemsActionImplCopyWith<
+          _$AppendContinuationItemsActionImpl>
+      get copyWith => __$$AppendContinuationItemsActionImplCopyWithImpl<
+          _$AppendContinuationItemsActionImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AppendContinuationItemsActionImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AppendContinuationItemsAction
+    implements AppendContinuationItemsAction {
+  const factory _AppendContinuationItemsAction(
+          {final ContinuationItems? continuationItems}) =
+      _$AppendContinuationItemsActionImpl;
+
+  factory _AppendContinuationItemsAction.fromJson(Map<String, dynamic> json) =
+      _$AppendContinuationItemsActionImpl.fromJson;
+
+  @override
+  ContinuationItems? get continuationItems;
+
+  /// Create a copy of AppendContinuationItemsAction
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AppendContinuationItemsActionImplCopyWith<
+          _$AppendContinuationItemsActionImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ContinuationItems _$ContinuationItemsFromJson(Map<String, dynamic> json) {
+  return _ContinuationItems.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ContinuationItems {
+  List<MusicShelfContent>? get continuationItems =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this ContinuationItems to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of ContinuationItems
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $ContinuationItemsCopyWith<ContinuationItems> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ContinuationItemsCopyWith<$Res> {
+  factory $ContinuationItemsCopyWith(
+          ContinuationItems value, $Res Function(ContinuationItems) then) =
+      _$ContinuationItemsCopyWithImpl<$Res, ContinuationItems>;
+  @useResult
+  $Res call({List<MusicShelfContent>? continuationItems});
+}
+
+/// @nodoc
+class _$ContinuationItemsCopyWithImpl<$Res, $Val extends ContinuationItems>
+    implements $ContinuationItemsCopyWith<$Res> {
+  _$ContinuationItemsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ContinuationItems
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? continuationItems = freezed,
+  }) {
+    return _then(_value.copyWith(
+      continuationItems: freezed == continuationItems
+          ? _value.continuationItems
+          : continuationItems // ignore: cast_nullable_to_non_nullable
+              as List<MusicShelfContent>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ContinuationItemsImplCopyWith<$Res>
+    implements $ContinuationItemsCopyWith<$Res> {
+  factory _$$ContinuationItemsImplCopyWith(_$ContinuationItemsImpl value,
+          $Res Function(_$ContinuationItemsImpl) then) =
+      __$$ContinuationItemsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<MusicShelfContent>? continuationItems});
+}
+
+/// @nodoc
+class __$$ContinuationItemsImplCopyWithImpl<$Res>
+    extends _$ContinuationItemsCopyWithImpl<$Res, _$ContinuationItemsImpl>
+    implements _$$ContinuationItemsImplCopyWith<$Res> {
+  __$$ContinuationItemsImplCopyWithImpl(_$ContinuationItemsImpl _value,
+      $Res Function(_$ContinuationItemsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ContinuationItems
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? continuationItems = freezed,
+  }) {
+    return _then(_$ContinuationItemsImpl(
+      continuationItems: freezed == continuationItems
+          ? _value._continuationItems
+          : continuationItems // ignore: cast_nullable_to_non_nullable
+              as List<MusicShelfContent>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ContinuationItemsImpl implements _ContinuationItems {
+  const _$ContinuationItemsImpl(
+      {final List<MusicShelfContent>? continuationItems})
+      : _continuationItems = continuationItems;
+
+  factory _$ContinuationItemsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ContinuationItemsImplFromJson(json);
+
+  final List<MusicShelfContent>? _continuationItems;
+  @override
+  List<MusicShelfContent>? get continuationItems {
+    final value = _continuationItems;
+    if (value == null) return null;
+    if (_continuationItems is EqualUnmodifiableListView)
+      return _continuationItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'ContinuationItems(continuationItems: $continuationItems)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ContinuationItemsImpl &&
+            const DeepCollectionEquality()
+                .equals(other._continuationItems, _continuationItems));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_continuationItems));
+
+  /// Create a copy of ContinuationItems
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ContinuationItemsImplCopyWith<_$ContinuationItemsImpl> get copyWith =>
+      __$$ContinuationItemsImplCopyWithImpl<_$ContinuationItemsImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ContinuationItemsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ContinuationItems implements ContinuationItems {
+  const factory _ContinuationItems(
+          {final List<MusicShelfContent>? continuationItems}) =
+      _$ContinuationItemsImpl;
+
+  factory _ContinuationItems.fromJson(Map<String, dynamic> json) =
+      _$ContinuationItemsImpl.fromJson;
+
+  @override
+  List<MusicShelfContent>? get continuationItems;
+
+  /// Create a copy of ContinuationItems
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ContinuationItemsImplCopyWith<_$ContinuationItemsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -73,8 +73,13 @@ class ChipCloudChipRenderer with _$ChipCloudChipRenderer {
 
 @freezed
 class SectionListContent with _$SectionListContent {
+  const SectionListContent._();
+
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory SectionListContent({
     MusicCarouselShelfRenderer? musicCarouselShelfRenderer,
+    @JsonKey(name: 'musicImmersiveCarouselShelfRenderer')
+    MusicCarouselShelfRenderer? musicImmersiveCarouselShelfRenderer,
     MusicShelfRenderer? musicShelfRenderer,
     MusicCardShelfRenderer? musicCardShelfRenderer,
     MusicPlaylistShelfRenderer? musicPlaylistShelfRenderer,
@@ -83,8 +88,33 @@ class SectionListContent with _$SectionListContent {
     MusicEditablePlaylistDetailHeaderRenderer?
         musicEditablePlaylistDetailHeaderRenderer,
     GridRenderer? gridRenderer,
+    ItemSectionRenderer? itemSectionRenderer,
   }) = _SectionListContent;
 
   factory SectionListContent.fromJson(Map<String, dynamic> json) =>
       _$SectionListContentFromJson(json);
+
+  MusicCarouselShelfRenderer? get carouselShelf =>
+      musicCarouselShelfRenderer ?? musicImmersiveCarouselShelfRenderer;
+}
+
+@freezed
+class ItemSectionRenderer with _$ItemSectionRenderer {
+  const factory ItemSectionRenderer({
+    List<ItemSectionContent>? contents,
+  }) = _ItemSectionRenderer;
+
+  factory ItemSectionRenderer.fromJson(Map<String, dynamic> json) =>
+      _$ItemSectionRendererFromJson(json);
+}
+
+@freezed
+class ItemSectionContent with _$ItemSectionContent {
+  const factory ItemSectionContent({
+    GridRenderer? gridRenderer,
+    MusicShelfRenderer? musicShelfRenderer,
+  }) = _ItemSectionContent;
+
+  factory ItemSectionContent.fromJson(Map<String, dynamic> json) =>
+      _$ItemSectionContentFromJson(json);
 }

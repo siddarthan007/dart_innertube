@@ -1,8 +1,9 @@
-library dart_innertube;
+library;
 
 // Core classes
 export 'src/youtube.dart';
 export 'src/inner_tube.dart';
+export 'src/exceptions.dart';
 
 // Core models
 export 'src/models/yt_item.dart';
